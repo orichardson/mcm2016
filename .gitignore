@@ -1,2 +1,6 @@
 data/CollegeScorecard_Raw_Data/
 data/IPEDS_Analytics_DCP_87_12_CSV/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
