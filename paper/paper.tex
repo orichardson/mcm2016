@@ -17,7 +17,7 @@
 \usepackage{color}
 \definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
 \definecolor{darkblue}{rgb}{0,0,0.4}
-\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+%\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
 
 % header and footer 
 \usepackage{fancyhdr}
@@ -55,6 +55,8 @@
 	\maketitle
 	\thispagestyle{empty}
 	
+%%%%%%%%%%%%%%%%%%% Now, we just include each of the sections. %%%%%%%%%%%%%%%%%%
+	\subfile{intro}
 	\subfile{model}
 	\subfile{results}
 	
