@@ -1,11 +1,13 @@
 \documentclass[11pt]{article}
 
 \usepackage{parskip}
+\usepackage{bbm}
 
-\usepackage{amsmath, amssymb}
+\usepackage{amsmath, amssymb, mathrsfs}
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{wallpaper}
+\usepackage{subfiles}
 
 \usepackage[width=6.5in,height=9.5in]{geometry}
 
@@ -52,6 +54,8 @@
 	\setcounter{page}{1}
 	\maketitle
 	\thispagestyle{empty}
-	\section{Model}
+	
+	\subfile{model}
+	\subfile{results}
 	
 \end{document}
