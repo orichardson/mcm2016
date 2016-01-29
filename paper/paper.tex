@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+\usepackage{parskip}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{wallpaper}
+
+\usepackage[width=6.5in,height=9.5in]{geometry}
+
+
+% colored PDF links
+\usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref} 
+\usepackage{color}
+\definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
+\definecolor{darkblue}{rgb}{0,0,0.4}
+\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+
+% header and footer 
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+%\pagestyle{fancy}
+\fancyhf{} % Removes everything
+\lhead{Team \# 54328}
+\rhead{Page \thepage\ of \pageref*{LastPage}}
+
+
+\makeatletter
+\renewcommand{\@maketitle}{
+	\newpage
+	\null
+	\vskip 2em%
+	\begin{center}%
+		{\LARGE \@title \par}%
+	\end{center}%
+	\par\vspace{2em}} \makeatother
+
+
+\title{[TITLE]}
+
+\begin{document}
+	\thispagestyle{empty}
+	\ThisULCornerWallPaper{1}{ExampleSummarySheet.pdf}
+	% Make sure you replace this .pdf file with *your* summary sheet 
+	
+	\ \vspace{7cm}
+	
+	text
+	
+	\clearpage
+	\setcounter{page}{1}
+	\maketitle
+	\thispagestyle{empty}
+	\section{Model}
+	
+\end{document}
