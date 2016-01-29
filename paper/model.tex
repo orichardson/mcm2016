@@ -1,16 +1,29 @@
 % !TeX root = model.tex
+
 \documentclass[paper.tex]{subfiles}
 
+\newcommand{\U}{\mathcal{U}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\V}{\mathcal{V}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\W}{\mathcal{W}}
+
 
 \begin{document}
 	
-	To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions. 
-	\section{Model}
-	We will assume that each institution uses money in a given way, in a way that has not changed over time. We can represent this as the 
+	\section{Formal Prolegomena}
 	
-	Let $D$ re
+	First, some notational definitions. We have tabulated them below. 
+	
+	\begin{itemize}
+		\item[($\U$)] The set of universities and colleges in question.
+		\item[($\D$)] The space of donations -- this might have multiple dimensions over $\Re$, depending on the specific categories of money we're interested in. 
+		\item[($\T$)] The space of times for which we have data. We will also be interested in a ``sliding window'' of times trailing a given time; if $t \in \T$, we'll denote this window as $\W_n(t)$, where $n$ is the size of the window.
+		
+		\item[($\V$)] The vector space of student metric variables $\{v_i\}$. Note that at this point, we have not yet committed ourselves to any such choice of variables, and so $\V$ includes also negative and neutral indicators of success.
+	\end{itemize}
+	
+	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions (see Hume). Here's ours: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while logically invalid, it seems very natural to judge an institution by its past.}. We can represent this as the 
 		
 	\[ \D \to \V \]
 
