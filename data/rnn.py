@@ -3,7 +3,7 @@ import itertools
 import numpy as np
 
 ## keep the headers, can use .iloc (integer locate)
-def load_data():
+def load_raw_data():
 	x_files = [ pd.read_csv("finances/delta_public_release_{0}.csv".format(p), encoding = "ISO-8859-1") for p in [ "87_99", "00_13" ]]
 	
 	y_files = []
@@ -18,6 +18,11 @@ def load_data():
 	return X_data, Y_data
 
 ## figure out test data
+def load_finances():
+	return pd.read_csv("finances_train.csv")
+
+def load_scorecard():
+	return pd.read_csv("scorecard_train.csv")
 
 # distribution of years
 
