@@ -21,13 +21,15 @@ def load_raw_data():
 	return X_data, Y_data
 
 ## figure out test data
-def load(kind='scorecard', numeric_only=True):
+def load(kind='scorecard', numeric_only=True, sort=True):
 	df = pd.read_csv("../data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
 		df = df.select_dtypes(include=['int64', 'float64'])
 	
-	df.sort_values('unitid', inplace=True, kind='heapsort')
+     if sort:
+         df.sort_values('unitid', inplace=True, kind='heapsort')
+
 	return df
 	
 
