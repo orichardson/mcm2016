@@ -48,15 +48,8 @@ def makePlots(Z):
 	for n in [2, 3, 5, 10]:
 		agglo = FeatureAgglomeration(n_clusters=n).fit(X1)
 		l_ag = agglo.labels_
-		print(l_ag)
 		plot(x2d, l_ag, "Feature Agglomeration")
 		
 		km = KMeans(n_clusters=n).fit(X1.T)
 		l_km = km.labels_
-		print(l_km)
 		plot(x2d, l_km, "K-Means")
-	
-	dbs = DBSCAN(eps = 100 ,min_samples=10).fit(X1.T)
-	l_db = dbs.labels_
-	print(l_db)
-	plot(x2d, l_db, "DBSCAN")
