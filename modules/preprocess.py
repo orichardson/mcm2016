@@ -1,6 +1,7 @@
 import pandas as pd
 import random
 import numpy as np
+import yaml
 
 ## keep the headers, can use .iloc (integer locate)
 def load_raw_data():
@@ -19,6 +20,21 @@ def load_raw_data():
 	Y_data.sort_values('unitid', inplace=True, kind='heapsort')
 	
 	return X_data, Y_data
+	
+## make term dictionary for V's 
+def 	makeVDict():
+	f = open('data/scorecard/data_dictionary.yaml')
+	dd = yaml.safe_load(f)['dictionary']
+	f.close()
+	
+	lookup = {}
+	
+	for di in dd.keys():
+		if 'source' in dd[di]:
+			lookup[dd[di]['source']] = (di, dd[di]['description'])
+
+	return lookup
+
 
 ## figure out test data
 def load(kind='scorecard', numeric_only=True, sort=True):
