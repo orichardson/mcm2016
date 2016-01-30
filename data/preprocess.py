@@ -1,7 +1,7 @@
 import pandas as pd
-import itertools
 import random
 import numpy as np
+from sklearn.preprocessing import Imputer
 
 ## keep the headers, can use .iloc (integer locate)
 def load_raw_data():
@@ -22,11 +22,17 @@ def load_raw_data():
 	return X_data, Y_data
 
 ## figure out test data
-def load_finances():
-	return pd.read_csv("processed/finances_train.csv")
+def load(kind='scorecard', numeric_only=True, impute=True):
+	df = pd.read_csv("processed/{0}.csv".format(kind))
+	
+	if numeric_only:
+		df = df.select_dtypes(include=['int64', 'float64'])
 
-def load_scorecard():
-	return pd.read_csv("processed/scorecard_train.csv")
+	if impute:
+		df = Imputer().fit_transform(df)
+	
+	return df
+	
 
 # distribution of years
 
