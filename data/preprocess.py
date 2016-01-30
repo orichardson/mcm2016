@@ -1,7 +1,6 @@
 import pandas as pd
 import random
 import numpy as np
-from sklearn.preprocessing import Imputer
 
 ## keep the headers, can use .iloc (integer locate)
 def load_raw_data():
@@ -22,15 +21,12 @@ def load_raw_data():
 	return X_data, Y_data
 
 ## figure out test data
-def load(kind='scorecard', numeric_only=True, impute=True):
-	df = pd.read_csv("processed/{0}.csv".format(kind))
+def load(kind='scorecard', numeric_only=True):
+	df = pd.read_csv("processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
 		df = df.select_dtypes(include=['int64', 'float64'])
 
-	if impute:
-		df = Imputer().fit_transform(df)
-	
 	return df
 	
 
