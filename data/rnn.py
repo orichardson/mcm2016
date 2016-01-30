@@ -4,11 +4,11 @@ import numpy as np
 
 ## keep the headers, can use .iloc (integer locate)
 def load_data():
-	x_files = [ pd.read_csv("finances/delta_public_release_{0}.csv".format(p)) for p in [ "87_99", "00_13" ]]
+	x_files = [ pd.read_csv("finances/delta_public_release_{0}.csv".format(p), encoding = "ISO-8859-1") for p in [ "87_99", "00_13" ]]
 	
 	y_files = []
 	for i in range(1996, 2014):
-		df = pd.read_csv("scorecard/MERGED{0}_PP.csv".format(i))
+		df = pd.read_csv("scorecard/MERGED{0}_PP.csv".format(i), encoding = "ISO-8859-1")
 		df.insert(len(df.columns), "academicyear", i)
 		y_files.append(df)
 
