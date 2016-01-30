@@ -16,7 +16,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def plot(x2d, flabels, title='' ):
-	
 	# Black removed and is used for noise instead.
 	unique_labels = set(flabels)
 	colors = plt.cm.Spectral(np.linspace(0, 1, len(unique_labels)))
@@ -34,32 +33,30 @@ def plot(x2d, flabels, title='' ):
 	plt.title(title +' (clusters: %d)' % len(unique_labels))
 	plt.show()
 
-N = 2
-
-imp = Imputer()
-scal = StandardScaler()
-vart = VarianceThreshold()
-
-pipe = Pipeline([("imputer", imp), ("var theshold", vart), ("scaler", scal) ])
-
-# Require Z
-X1 = pipe.fit_transform(Z)
-pca = PCA(n_components=2)
-x2d = pca.fit_transform(X1.T)
-
-for n in [2, 3, 5, 10]:
-	agglo = FeatureAgglomeration(n_clusters=n)
-	X1_red = agglo.fit(X1)
-	l_ag = agglo.labels_
-	print(l_ag)
-	plot(x2d, l_ag, "Feature Agglomeration")
+def makePlots(Z):
+	imp = Imputer()
+	scal = StandardScaler()
+	vart = VarianceThreshold()
 	
-	km = KMeans(n_clusters=n).fit(X1.T)
-	l_km = km.labels_
-	print(l_km)
-	plot(x2d, l_km, "K-Means")
-
-dbs = DBSCAN(eps = 100 ,min_samples=10).fit(X1.T)
-l_db = dbs.labels_
-print(l_db)
-plot(x2d, l_db, "DBSCAN")
+	pipe = Pipeline([("imputer", imp), ("var theshold", vart), ("scaler", scal) ])
+	
+	# Require Z
+	X1 = pipe.fit_transform(Z)
+	pca = PCA(n_components=2)
+	x2d = pca.fit_transform(X1.T)
+	
+	for n in [2, 3, 5, 10]:
+		agglo = FeatureAgglomeration(n_clusters=n).fit(X1)
+		l_ag = agglo.labels_
+		print(l_ag)
+		plot(x2d, l_ag, "Feature Agglomeration")
+		
+		km = KMeans(n_clusters=n).fit(X1.T)
+		l_km = km.labels_
+		print(l_km)
+		plot(x2d, l_km, "K-Means")
+	
+	dbs = DBSCAN(eps = 100 ,min_samples=10).fit(X1.T)
+	l_db = dbs.labels_
+	print(l_db)
+	plot(x2d, l_db, "DBSCAN")
