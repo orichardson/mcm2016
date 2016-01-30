@@ -28,3 +28,14 @@
  26: 98,
  27: 4007,
  28: 1}
+
+train/test split
+
+len(X_test) = 15367
+len(Y_test) = 10399
+len(X_train) = 136973
+len(Y_train) = 93365
+len(X_data) = 221957
+len(Y_data) = 124699
+len(same_schools(X_data, Y_data, contiguous=False)) = 8317 
+len(same_schools(X_data, Y_data)) = 1770 

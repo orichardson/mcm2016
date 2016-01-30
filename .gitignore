@@ -6,6 +6,8 @@ paper/*.aux
 paper/*.log
 paper/*.out
 paper/*.synctex.gz
+*__MACOSX
+*.csv
 *.swp
 *.swo
 *_test.csv
