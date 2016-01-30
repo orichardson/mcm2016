@@ -4,11 +4,11 @@ import numpy as np
 
 ## keep the headers, can use .iloc (integer locate)
 def load_raw_data():
-	x_files = [ pd.read_csv("finances/delta_public_release_{0}.csv".format(p), encoding = "ISO-8859-1") for p in [ "87_99", "00_13" ]]
+	x_files = [ pd.read_csv("../data/finances/delta_public_release_{0}.csv".format(p), encoding = "ISO-8859-1") for p in [ "87_99", "00_13" ]]
 	
 	y_files = []
 	for i in range(1996, 2014):
-		df = pd.read_csv("scorecard/MERGED{0}_PP.csv".format(i), encoding = "ISO-8859-1")
+		df = pd.read_csv("../data/scorecard/MERGED{0}_PP.csv".format(i), encoding = "ISO-8859-1")
 		df.insert(len(df.columns), "academicyear", i)
 		y_files.append(df)
 
@@ -22,11 +22,12 @@ def load_raw_data():
 
 ## figure out test data
 def load(kind='scorecard', numeric_only=True):
-	df = pd.read_csv("processed/{0}_train.csv".format(kind))
+	df = pd.read_csv("../data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
 		df = df.select_dtypes(include=['int64', 'float64'])
-
+	
+	df.sort_values('unitid', inplace=True, kind='heapsort')
 	return df
 	
 
@@ -61,21 +62,21 @@ def is_contiguous(alist):
 	"""Determines if a list consists of contiguous integers"""
 	return map(lambda x: x - alist[0], alist) == range(len(alist))
 
+def alltrue(x):
+	return True	
 
-def same_schools(X, Y, contiguous=True):
-	X_id2year = id_to_year(X)	
-	Y_id2year = id_to_year(Y)
-
-	if contiguous:
-		X_schools = set(x for x in X_id2year if is_contiguous(X_id2year[x]))
-		Y_schools = set(y for y in Y_id2year if is_contiguous(Y_id2year[y]))
-	else:
-		X_schools = set(x for x in X_id2year if 1 <= len(X_id2year[x]) and len(X_id2year[x]) <= 28)
-		Y_schools = set(y for y in Y_id2year if 1 <= len(Y_id2year[y]) and len(Y_id2year[y]) <= 28)		
+def same_schools(X, Y, X_id2year=None, Y_id2year=None,condition=alltrue):
+	if X_id2year is None:
+		X_id2year = id_to_year(X)	
+	if Y_id2year is None:
+		Y_id2year = id_to_year(Y)
+	
+	X_schools = set([x for x in X_id2year if condition(X_id2year[x])])
+	Y_schools = set([x for x in Y_id2year if condition(Y_id2year[y])])
 
 	return X_schools & Y_schools
 	
-def create_test(X, Y, percent, contiguous=True):
+def create_test(X, Y, percent, contiguous=lambda x: is_contiguous(x)):
 	same = list(same_schools(X, Y, contiguous))
 	cutoff = int(percent * len(same))
 	random.shuffle(same)
