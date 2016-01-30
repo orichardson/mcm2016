@@ -1,6 +1,5 @@
 data/__*
 data/scorecard/*
-data/scorecard/v_common.csv
 data/finances/*
 paper/*.aux
 paper/*.log
