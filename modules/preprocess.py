@@ -26,8 +26,7 @@ def load(kind='scorecard', numeric_only=True, sort=True):
 	
 	if numeric_only:
 		df = df.select_dtypes(include=['int64', 'float64'])
-	
-     if sort:
+	if sort:
          df.sort_values('unitid', inplace=True, kind='heapsort')
 
 	return df
