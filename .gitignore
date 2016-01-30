@@ -1,5 +1,6 @@
-data/CollegeScorecard_Raw_Data/
-data/IPEDS_Analytics_DCP_87_12_CSV/
+data/scorecard/*
+data/scorecard/v_common.csv
+data/finances/*
 paper/*.aux
 paper/*.log
 paper/*.out

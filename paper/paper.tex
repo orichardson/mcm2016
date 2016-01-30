@@ -17,7 +17,7 @@
 \usepackage{color}
 \definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
 \definecolor{darkblue}{rgb}{0,0,0.4}
-\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+%\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
 
 % header and footer 
 \usepackage{fancyhdr}
@@ -27,7 +27,7 @@
 \lhead{Team \# 54328}
 \rhead{Page \thepage\ of \pageref*{LastPage}}
 
-
+\renewcommand{\Re}{\mathbbm{R}}
 \makeatletter
 \renewcommand{\@maketitle}{
 	\newpage
@@ -53,8 +53,13 @@
 	\clearpage
 	\setcounter{page}{1}
 	\maketitle
+	%\tableofcontents
+	%\pagebreak
+		
 	\thispagestyle{empty}
 	
+%%%%%%%%%%%%%%%%%%% Now, we just include each of the sections. %%%%%%%%%%%%%%%%%%
+	\subfile{intro}
 	\subfile{model}
 	\subfile{results}
 	

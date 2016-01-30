@@ -1,45 +1,32 @@
 % !TeX root = model.tex
+
 \documentclass[paper.tex]{subfiles}
 
+\newcommand{\U}{\mathcal{U}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\V}{\mathcal{V}}
-	\title{Doing cool data things}
-	\author{Oliver Richardson}
-	\author{Michael Zhou}
-	\author{Alexis Wilson}
-	\date{February 3rd, 2016}
-	%help with authors, not showing up
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\W}{\mathcal{W}}
 
 
 \begin{document}
-	\maketitle
-	
-	
-	\tableofcontents
-	\pagebreak
-	
-	\section{Introduction}
-	 Academic success among undergraduate students at universities in the U.S. depends on several factors, such as teacher capability, class size, and university funding. however, a well-funded institution is more advantaged in providing resources to its students than a university lacking adequate funds. Additional resources that are readily available to the student have been shown to increase student performance across the board.\cite{greenwald1996effect} The Goodgrant Foundation seeks to provide certain institutions with monetary grants with the goal to increase academic success among students at these universities. 
-	
-	
-	\section{Assumptions}
-	These are some things we assumed in order to create our model!
-	
-	To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions. 
-	\section{Model}
-	We will assume that each institution uses money in a given way, in a way that has not changed over time. We can represent this as the 
-	
-	Let $D$ re
-		
-	\[ \D \to \V \]
-	
-	\section{Conclusion}
-	This is what we conclude after running our model!
-	
-	\section{Strengths and Weaknesses}
-	Here are some good and not so good things about our model!
-	
-	\section{References}
-	Here are all the friendly people who helped us out even if they didn't know they were helping us out!
 
+	\section{Formal Prolegomena}
+	
+	First, some notational definitions. We have tabulated them below. 
+	
+	\begin{itemize}
+		\item[($\U$)] The set of universities and colleges in question.
+		\item[($\D$)] The space of donations -- this might have multiple dimensions over $\Re$, depending on the specific categories of money we're interested in. 
+		\item[($\T$)] The space of times for which we have data. We will also be interested in a ``sliding window'' of times trailing a given time; if $t \in \T$, we'll denote this window as $\W_n(t)$, where $n$ is the size of the window.
+		\item[($\V$)] The vector space of student metric variables $\{v_i\}$. Note that at this point, we have not yet committed ourselves to any such choice of variables, and so $\V$ includes also negative and neutral indicators of success.
+		
+		\item[($d\V)$] The 1-form of 
+	\end{itemize}
+	
+	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions (see Hume). Here's ours: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while technically invalid, it seems very natural to judge an institution by its past performance -- indeed, this is the best we can hope for from a dataset}. We can now talk about the effect of donor money over time on the variables in $\V$ as a mapping
+	\begin{equation}
+	F: \D \times \W_n \to \V
+	\end{equation} 	
+	that predicts the 
 \end{document}
