@@ -1,0 +1,12 @@
+clustering algorithm definitions
+
+vmeasure = validity measure
+silhouette coefficient: varies between -1 and 1. measure of distance rations between points in the cluster (i think) pg 541 (pdf pg 55)
+randscore: possibly related to random initialization of centroids pg 501 (pdf pg 15)
+The Rand index penalizes both false positive and false negative decisions during clustering.
+Normalized mutual information can be information-theoretically interpreted.
+completeness: a complete cluster assigns every object to a cluster pg 493 (pdf pg 7)
+
+pdf: https://www-users.cs.umn.edu/~kumar/dmbook/ch8.pdf
+
+also: http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html
