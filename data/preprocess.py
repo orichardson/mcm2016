@@ -23,10 +23,10 @@ def load_raw_data():
 
 ## figure out test data
 def load_finances():
-	return pd.read_csv("finances_train.csv")
+	return pd.read_csv("processed/finances_train.csv")
 
 def load_scorecard():
-	return pd.read_csv("scorecard_train.csv")
+	return pd.read_csv("processed/scorecard_train.csv")
 
 # distribution of years
 
