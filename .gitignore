@@ -8,5 +8,5 @@ paper/*.out
 paper/*.synctex.gz
 *.swp
 *.swo
-_test.csv
-_train.csv
+*_test.csv
+*_train.csv
