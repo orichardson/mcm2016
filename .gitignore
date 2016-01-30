@@ -1,13 +1,14 @@
-data/__*
+*/__*
 data/scorecard/*
 data/finances/*
 paper/*.aux
 paper/*.log
 paper/*.out
 paper/*.synctex.gz
-*__MACOSX
 *.csv
 *.swp
 *.swo
 *_test.csv
 *_train.csv
+!data/finances/data_dict.csv
+!data/scorecard/data_dictionary.yaml
