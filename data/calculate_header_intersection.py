@@ -31,5 +31,5 @@ for yr in range(1996, 2013):
 				
 z = [[xi[0], xi[1], xi[2]] for xi in x if xi[1] in ys]
 towrite = pd.DataFrame(z)
-towrite.to_csv('thing.csv')
 
+towrite.to_csv('processed/v_common.csv')
