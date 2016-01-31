@@ -17,17 +17,25 @@
 	
 	\begin{itemize}
 		\item[($\U$)] The set of universities and colleges in question.
-		\item[($\D$)] The space of donations -- this might have multiple dimensions over $\Re$, depending on the specific categories of money we're interested in. 
+		\item[($\D$)] Financial space. In general, this is the space of donations -- this might have multiple dimensions over $\Re$, depending on the specific categories of money we're interested in. It might also contain certain categories of expenditures that we might be able to influence by placing constraints on how institutions are allowed to spend their money.  
 		\item[($\T$)] The space of times for which we have data. 
 		\item[($\V$)] The vector space of student metric variables $\{v_i\}$. Note that at this point, we have not yet committed ourselves to any such choice of variables, and so $\V$ includes also negative and neutral indicators of success.
 		\item[($d\V)$] In a continuous setting, this would be the $\V$ differential 1-form, but here it is simply a running difference over time.  
 	\end{itemize}
+		
+	We will also be interested in a ``sliding window'' of times trailing a given time; if we're interested in a subspace of time $T \subset \T$, we can construct this window as $\W_T : T  \to \D$. Note that in the case of a discrete $T$, comprised of $n$ time steps, $\W_T = \D^n$. All of our data is discrete, of course, but this construction also works for continuous subspaces of $\T$, which means we can think of different choices of $T$ as appropriate approximations, instead of sets with fundamentally different structures.
 	
-	We will also be interested in a ``sliding window'' of times trailing a given time; if $t \in \T$, we'll denote this window as $\W_n : [0,1] \to \D$, where $n$ is the size of the window; this comes with associated constraints 
-	
-	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions (see Hume). Here's ours: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while technically invalid, it seems very natural to judge an institution by its past performance -- indeed, this is the best we can hope for from a dataset}. We can now talk about the effect of donor money over time on the variables in $\V$ as a mapping
+	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions. Here's our first and most central one: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while technically invalid, it seems very natural to judge an institution by its past performance -- indeed, this is the best we can hope for from a dataset}. We can now talk about the effect of donor money over time on the variables in $\V$ as a mapping
 	\begin{equation}
-		F: \D \times \W_n \to \V
+		F: \W_T \to d\V
 	\end{equation} 	
-	that predicts the 
+	That is -- a function which takes the financial input we control, and changes student metric variables in some way. This is to be distinguished from a function $\phi: \W_T \to \V$ that estimates the metric variables directly. There are two reasons for this: first
+	
+	The first goal of this analysis is to learn this function. 
+	
+	Supposing that we have a suitably robust approximation for $F$, we still 
+	
+	\begin{enumerate}
+		\item Apply Machine Learning techniques to estimate the effect of donations on the 
+	\end{enumerate}
 \end{document}
