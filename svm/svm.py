@@ -12,12 +12,12 @@ def train_SVM(X, Y, X_val, Y_val, C=1.0, kernel='rbf', degree=3, gamma='auto', c
 	clf = SVC(C, kernel, degree, gamma, coef0, shrinking, probability, tol, cache_size, class_weight, verbose, max_iter, decision_function_shape, random_state)
 
 	for i in range(len(Y[0])):
-		Y_new = np.array([x[i] for x in Y])
-		X_new = np.array([x.flatten() for x in X])
+		Y_new = np.fromiter((x[i] for x in Y), np.double)
+		X_new = np.fromiter((x.flatten() for x in X), np.double)
 		clf.fit(X_new, Y_new)
 
-		Y_val_new = np.array([x[i] for x in Y_val])
-		X_val_new = np.array([x.flatten() for x in X_val])
+		Y_val_new = np.fromiter((x[i] for x in Y_val), np.double)
+		X_val_new = np.fromiter((x.flatten() for x in X_val), np.double)
 		
 		print("y-value: y_{0}, score: {1}".format(i, clf.score(X_val_new, Y_val_new)))
 		params[i] = clf.get_params()
