@@ -13,11 +13,11 @@ def train_SVM(X, Y, X_val, Y_val, C=1.0, kernel='rbf', degree=3, gamma='auto', c
 
 	for i in range(len(Y[0])):
 		Y_new = np.array([x[i] for x in Y])
-		X_new = X[i].flatten()
+		X_new = np.array([x.flatten() for x in X])
 		clf.fit(X_new, Y_new)
 
 		Y_val_new = np.array([x[i] for x in Y_val])
-		X_val_new = X_val[i].flatten()
+		X_val_new = np.array([x.flatten() for x in X_val])
 		
 		print("y-value: y_{0}, score: {1}".format(i, clf.score(X_val_new, Y_val_new)))
 		params[i] = clf.get_params()
