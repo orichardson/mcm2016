@@ -22,7 +22,7 @@ def load_raw_data():
 
 ## figure out test data
 def load(kind='scorecard', numeric_only=True):
-	df = pd.read_csv("../data/processed/{0}_train.csv".format(kind))
+	df = pd.read_csv("data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
 		df = df.select_dtypes(include=['int64', 'float64'])
@@ -72,12 +72,12 @@ def same_schools(X, Y, X_id2year=None, Y_id2year=None,condition=alltrue):
 		Y_id2year = id_to_year(Y)
 	
 	X_schools = set([x for x in X_id2year if condition(X_id2year[x])])
-	Y_schools = set([x for x in Y_id2year if condition(Y_id2year[y])])
+	Y_schools = set([x for x in Y_id2year if condition(Y_id2year[x])])
 
 	return X_schools & Y_schools
 	
 def create_test(X, Y, percent, contiguous=lambda x: is_contiguous(x)):
-	same = list(same_schools(X, Y, contiguous))
+	same = list(same_schools(X, Y, condition=contiguous))
 	cutoff = int(percent * len(same))
 	random.shuffle(same)
 	restricted = set(same[:cutoff])	 
