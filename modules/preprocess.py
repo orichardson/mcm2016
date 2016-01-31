@@ -37,11 +37,11 @@ def 	makeVDict():
 
 
 ## figure out test data
-def load(kind='scorecard', numeric_only=True):
-	df = pd.read_csv("data/processed/{0}_train.csv".format(kind))
+def load(kind='scorecard', numeric_only=True, sort=True):
+	df = pd.read_csv("data/processed/{0}_train.csv".format(kind),encoding='cp1252')
 	
 	if numeric_only:
-		df = df.select_dtypes(include=['int64', 'float64'])
+         df = df.select_dtypes(include=['int64', 'float64'])
 	if sort:
          df.sort_values('unitid', inplace=True, kind='heapsort')
 
