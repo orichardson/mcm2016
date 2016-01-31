@@ -7,6 +7,7 @@ import numpy as np
 
 def train_SVM(X, Y, X_val, Y_val, C=1.0, kernel='rbf', degree=3, gamma='auto', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=None, random_state=None):
 	"""Assumes all irrelevant features have been removed from X and Y"""
+	"""Learns several hundred SVMs"""
 
 	params = [None] * len(Y[0])
 	clf = SVC(C, kernel, degree, gamma, coef0, shrinking, probability, tol, cache_size, class_weight, verbose, max_iter, decision_function_shape, random_state)

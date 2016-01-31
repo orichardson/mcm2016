@@ -22,3 +22,6 @@ def rnn_model():
 	model.add(Activation("sigmoid"))
 	model.compile(loss="mean_squared_error", optimizer="rmsprop")
 
+
+def train_RNN(X, Y):
+	pass
