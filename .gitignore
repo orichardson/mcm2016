@@ -12,3 +12,4 @@ paper/*.synctex.gz
 *_train.csv
 !data/finances/data_dict.csv
 !data/scorecard/data_dictionary.yaml
+*.npy
