@@ -45,11 +45,21 @@ def makePlots(Z):
 	pca = PCA(n_components=2)
 	x2d = pca.fit_transform(X1.T)
 	
+	labels = {}
+	
 	for n in [2, 3, 5, 10]:
 		agglo = FeatureAgglomeration(n_clusters=n).fit(X1)
-		l_ag = agglo.labels_
-		plot(x2d, l_ag, "Feature Agglomeration")
+		labels['ag%d'%n] = agglo.labels_
+		plot(x2d, agglo.labels_, "Feature Agglomeration")
 		
 		km = KMeans(n_clusters=n).fit(X1.T)
-		l_km = km.labels_
-		plot(x2d, l_km, "K-Means")
+		labels['km%d'%n] = km.labels_
+		plot(x2d, km.labels_, "K-Means")
+	
+	dbs = DBSCAN(eps = 100 ,min_samples=10).fit(X1.T)
+	labels['DBSCAN'] = dbs.labels_
+	plot(x2d, dbs.labels_, "DBSCAN")
+		
+	return labels
+	
+

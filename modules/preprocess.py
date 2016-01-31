@@ -2,6 +2,10 @@ import pandas as pd
 import random
 import numpy as np
 import yaml
+import collections
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+from sklearn.pipeline import Pipeline
+from scipy.sparse import dok_matrix, hstack
 
 ## keep the headers, can use .iloc (integer locate)
 def load_raw_data():
@@ -22,7 +26,7 @@ def load_raw_data():
 	return X_data, Y_data
 	
 ## make term dictionary for V's 
-def 	makeVDict():
+def makeVDict():
 	f = open('data/scorecard/data_dictionary.yaml')
 	dd = yaml.safe_load(f)['dictionary']
 	f.close()
@@ -37,13 +41,13 @@ def 	makeVDict():
 
 
 ## figure out test data
-def load(kind='scorecard', numeric_only=True, sort=True):
-	df = pd.read_csv("data/processed/{0}_train.csv".format(kind),encoding='cp1252')
+def load(kind='scorecard', numeric_only=True, sort=False):
+	df = pd.read_csv("data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
          df = df.select_dtypes(include=['int64', 'float64'])
 	if sort:
-         df.sort_values('unitid', inplace=True, kind='heapsort')
+		df.sort_values('unitid', inplace=True, kind='heapsort')
 
 	return df
 	
@@ -103,5 +107,47 @@ def create_test(X, Y, percent, contiguous=lambda x: is_contiguous(x)):
 	return X[X['unitid'].isin(restricted)], Y[Y['unitid'].isin(restricted)], X[X['unitid'].isin(unrestricted)], Y[Y['unitid'].isin(unrestricted)]
 
 		
-		
+def flatten_catdat(X, category):
+	"""convert school labels (categorical) into a one hot matrix concatenated along rows"""
+	label_enc = LabelEncoder()
+	X[category] = label_enc.fit_transform(X[category])
+	hot_enc = OneHotEncoder()
+	flattened = hot_enc.fit_transform(X[[category]].as_matrix())
+	X.drop(category, axis=1, inplace=True)
+	encoder = Pipeline([ ('label_enc', label_enc), ('hot', hot_enc)]) 
+	return flattened, X, encoder
 	
+def remove_undesirable(X, x_columns, Y, y_columns):	
+	return (X.drop(x_columns), Y.drop(y_columns))
+	
+def prepare_data(X, Y, window=5):
+	"""assumes X, Y are datasets with the same schools in them, with all categorical variables flattened and the school variables in the very front"""
+	common = same_schools(X, Y)
+	X = X[X['unitid'].isin(common)]	
+	Y = Y[Y['unitid'].isin(common)]
+	flattened, X, pipe = flatten_catdat(X, 'unitid')
+	
+	Y.sort_values(['unitid', 'academicyear'], inplace=True, kind='quicksort')
+	
+	data = []
+	previous = {}
+	print('fuck')
+	for i, year in enumerate(Y['academicyear']):
+		school = Y.iloc[i, :]['unitid']
+		#school = Y.columns[np.where(Y.iloc[i, :len(columns)] == 1) ]	
+		previous[(school, year)] = i
+		
+		try:
+			Y_data = Y.iloc[i, :] - Y.iloc[previous[(school, year - 1)], :]
+		except:
+			Y_data = Y.iloc[i, :] - Y.iloc[i, :]
+		X_school = pipe.transform(school)
+		idx = np.where(X_school == 1)[0][0]
+		X_data = X[X.iloc[:, idx] == 1 & (X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
+		# removes school data from the Y value
+		data.append((hstack([X_school, dok_matrix(np.matrix(X_data.values).flatten())]), np.matrix(Y_data)))
+		
+
+	return np.array(data)
+	
+
