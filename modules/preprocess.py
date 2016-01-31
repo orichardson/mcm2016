@@ -37,12 +37,11 @@ def 	makeVDict():
 
 
 ## figure out test data
-def load(kind='scorecard', numeric_only=True, sort=True):
-	df = pd.read_csv("../data/processed/{0}_train.csv".format(kind))
+def load(kind='scorecard', numeric_only=True):
+	df = pd.read_csv("data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
 		df = df.select_dtypes(include=['int64', 'float64'])
-		
 	if sort:
          df.sort_values('unitid', inplace=True, kind='heapsort')
 
@@ -90,12 +89,12 @@ def same_schools(X, Y, X_id2year=None, Y_id2year=None,condition=alltrue):
 		Y_id2year = id_to_year(Y)
 	
 	X_schools = set([x for x in X_id2year if condition(X_id2year[x])])
-	Y_schools = set([x for x in Y_id2year if condition(Y_id2year[y])])
+	Y_schools = set([x for x in Y_id2year if condition(Y_id2year[x])])
 
 	return X_schools & Y_schools
 	
 def create_test(X, Y, percent, contiguous=lambda x: is_contiguous(x)):
-	same = list(same_schools(X, Y, contiguous))
+	same = list(same_schools(X, Y, condition=contiguous))
 	cutoff = int(percent * len(same))
 	random.shuffle(same)
 	restricted = set(same[:cutoff])	 
@@ -106,3 +105,48 @@ def create_test(X, Y, percent, contiguous=lambda x: is_contiguous(x)):
 		
 		
 	
+def flatten_catdat_single(X):
+	"""convert school labels (categorical) into a one hot matrix concatenated along rows"""
+	num_schools = len(set(X['unitid']))
+	last_spot = 0
+	spots = collections.OrderedDict()
+	one_hot_matrix = pd.DataFrame(np.zeros(shape=(len(X.iloc[0,:]), num_schools))
+	for i in range(len(X.iloc[0, :])):
+		inst_id = X.iloc[i,:]['unitid']
+		if inst_id not in spots:
+			spots[inst_id] = len(spots)
+
+		one_hot_matrix.iloc[i,spots[inst_id]] = 1
+	one_hot_matrix.columns = spots.keys()	
+	X = X.drop('unitid')
+	return pd.concat([one_hot_matrix, X], axis=1)
+			
+	
+def flatten_catdat(X, Y):
+	"""convert categorical labels of schools into a one hot matrix, concatenated along rows"""
+	"""assumes X,Y are datasets with the same schools in them"""
+	return flatten_catdat_single(X), flatten_catdat_single(Y)
+					
+
+def prepare_data(X, Y, window=5):
+	"""assumes X, Y are datasets with the same schools in them, possibly flattened"""
+	columns = [x for x in (set(X.columns) & set(Y.columns)) if isinstance(x, float)].append('academicyear')
+	X.sort_values(columns, inplace=True, kind='quicksort')  
+	Y.sort_values(columns, inplace=True, kind='quicksort')
+	
+	data = []
+	previous = {}
+	for i, year in Y['academicyear']:
+		school = Y.columns[np.where(Y.iloc[i, :len(columns)] == 1) ]	
+		previous[(school, year)] = i
+		
+		Y_data = Y.iloc[i, :] - Y.iloc[previous[(school, year - 1)], :]
+		Y_data[school] = 1
+			
+		X_data = X[X[school] == 1 & (X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
+		data.append( (X_data, Y_data) )
+		
+
+	return np.array(data)
+	
+
