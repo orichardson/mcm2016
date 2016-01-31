@@ -22,7 +22,7 @@ def load_raw_data():
 	return X_data, Y_data
 	
 ## make term dictionary for V's 
-def 	makeVDict():
+def makeVDict():
 	f = open('data/scorecard/data_dictionary.yaml')
 	dd = yaml.safe_load(f)['dictionary']
 	f.close()
@@ -105,14 +105,14 @@ def create_test(X, Y, percent, contiguous=lambda x: is_contiguous(x)):
 		
 		
 	
-def flatten_catdat_single(X):
+def flatten_catdat(X, category):
 	"""convert school labels (categorical) into a one hot matrix concatenated along rows"""
-	num_schools = len(set(X['unitid']))
+	num_schools = len(set(X[category]))
 	last_spot = 0
 	spots = collections.OrderedDict()
-	one_hot_matrix = pd.DataFrame(np.zeros(shape=(len(X.iloc[0,:]), num_schools))
+	one_hot_matrix = pd.DataFrame(np.zeros(shape=(len(X.iloc[0,:]), num_schools)))
 	for i in range(len(X.iloc[0, :])):
-		inst_id = X.iloc[i,:]['unitid']
+		inst_id = X.iloc[i,:][category]
 		if inst_id not in spots:
 			spots[inst_id] = len(spots)
 
@@ -121,22 +121,20 @@ def flatten_catdat_single(X):
 	X = X.drop('unitid')
 	return pd.concat([one_hot_matrix, X], axis=1)
 			
-	
-def flatten_catdat(X, Y):
-	"""convert categorical labels of schools into a one hot matrix, concatenated along rows"""
-	"""assumes X,Y are datasets with the same schools in them"""
-	return flatten_catdat_single(X), flatten_catdat_single(Y)
-					
 
+def remove_undesirable(X, Y):	
+	pass	
+	
 def prepare_data(X, Y, window=5):
-	"""assumes X, Y are datasets with the same schools in them, possibly flattened"""
+	"""assumes X, Y are datasets with the same schools in them, with all categorical variables flattened and the school variables in the very front"""
 	columns = [x for x in (set(X.columns) & set(Y.columns)) if isinstance(x, float)].append('academicyear')
 	X.sort_values(columns, inplace=True, kind='quicksort')  
-	Y.sort_values(columns, inplace=True, kind='quicksort')
+	Y.sort_values(['unitid', 'academicyear'], inplace=True, kind='quicksort')
 	
 	data = []
 	previous = {}
 	for i, year in Y['academicyear']:
+		#school = Y.iloc[i, :]['unitid']
 		school = Y.columns[np.where(Y.iloc[i, :len(columns)] == 1) ]	
 		previous[(school, year)] = i
 		
@@ -144,6 +142,8 @@ def prepare_data(X, Y, window=5):
 		Y_data[school] = 1
 			
 		X_data = X[X[school] == 1 & (X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
+		# removes school data from the Y value
+		remove_undesirable(X_data, Y_data)
 		data.append( (X_data, Y_data) )
 		
 
