@@ -1,0 +1,25 @@
+% !TeX root = results.tex
+\documentclass[paper.tex]{subfiles}
+
+\begin{document}
+\section{Data Collection and Variable Selection}
+To carry out our analysis, we used two datasets. The first was the Delta Cost Project database\footnote{Provided at \url{https://nces.ed.gov/ipeds/deltacostproject/}.}, a dataset derived from the IPEDS datasets containing time series data from the academic years 1986-87 and 2011-12. The second was the College Scorecard dataset,\footnote{Provided at \url{https://collegescorecard.ed.gov/data/}.} which contains data by year from 1996 to 2013 on a variety of measures of student performance, earnings and debt. As discussed, our goal was to determine the influence of certain financial variables on measures of student success. To this extent, we trained several machine learning classifiers with the financial data from the Delta Cost Project as our features, in an attempt to predict the differentials of student success, calculated from the College Scorecard dataset. We used two classifiers, and the approach to variable selection and preprocessing differed between the two.
+
+\subsection{Support Vector Machines} 
+Suppose we have a set $\{ f_i^{(t)} \}_{i = 1}^n$ of financial variables drawn from the Delta Cost Project database, and a set $\{ s_i^{(t)} \}_{i = 1}^m$ of measures of student success. For example, one of these may be the amount of private contributions to a university during the year $t$. Our approach here was to train an SVM regressor for each $s_i^{(t)}$, using the $f_j^{(t)}$ as features. 
+\subsubsection{Variable Selection} 
+In order to use this work to help decide how to distribute money of the Goodgrant Foundation, we chose as features those variables over which we had direct control. For instance, we chose a variable from the Delta Cost Project database that represented the amount of revenue from private gifts, grants and contracts. We also picked as features the variables that represented the amount of revenue spent on research, student instruction, and so on. A complete list of variables chosen, for both features and targets, can be found in the appendix.  
+
+In addition, to account for the fact that different schools may handle revenue more or less effectively, we used a one-hot encoding of the school ID and added those to our $f_i^{(t)}$. More precisely, if there are $n$ distinct school IDs, then we expand the school ID feature into $n$ single bit features. From now on, we refer to this as the \emph{one-hot encoding} of the feature vectors. 
+\subsubsection{Data Preprocessing}
+In order to account for the temporality of the data, we used a window of five years when training and evaluating the SVM regressor. If we let $X_u^{(t)}, Y_u^{(t)}$ denote the financial and student success data, respectively, this means that for each school $u$, and for each year $t \in \{1996, ..., 2014\}$, we formed the single example $(h(X_u^{(t)}), Y_u^{(t)} - Y_u^{(t - 1)})$, where \[ h(X_u^{(t)}) = \operatorname{concat}(X_u^{t - 1}, ..., X_u^{t - 5}), \] and the $\operatorname{concat}$ operator represents the concatenation of these row vectors. 
+
+Due to computational constraints, we were forced to retain only a single copy of the one-hot encoding in each concatenation (as opposed to $5$, the size of the window). While this may also seem like a quite natural decision, this can affect the complexity of the model being learned. While normally the SVM regressor would have had to learn from the data that the same weights are relevant to each of the five one-hot encodings, we have essentially given it free without paying for it by more training examples. 
+
+Finally, we have also dealt with the issue of missing or not-a-number feature data by using the mean strategy for data imputation.
+
+
+\subsection{Recurrent Neural Networks} Since our data is quite naturally sequential, and recurrent neural networks have had immense success with sequential data, we tried using them for our analysis. In addition, in a recent paper \ref{cho}, an approach is described to do machine translation using Gated Recurrent Units in the form of an encoder and a decoder. The encoder essentially provides a summary of the data, which the decoder attempts to recover.
+
+As described before, our approach consists of several steps, one goal of which is to produce a ranking function. We thought to use these encoder-decoder RNNs since they could essentially learn a single number summary of how the success data was influenced by the financial data. The hope is this is that these single number summaries, perhaps transformed by a softmax, would encode some sort of ranking.  
+\end{document}

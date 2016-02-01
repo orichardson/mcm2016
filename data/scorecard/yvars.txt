@@ -1,4 +1,3 @@
-SCORECARD relevant data points
 GRAD_DEBT_MDN
 PCTPELL
 OVERALL_YR3_N
