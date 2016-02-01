@@ -1,0 +1,13 @@
+% !TeX root = results.tex
+\documentclass[paper.tex]{subfiles}
+
+\begin{document}
+\section{Data Collection and Variable Selection}
+To carry out our analysis, we used two datasets. The first was the Delta Cost Project database\footnote{Provided at \url{https://nces.ed.gov/ipeds/deltacostproject/}.}, a dataset derived from the IPEDS datasets containing time series data from the academic years 1986-87 and 2011-12. The second was the College Scorecard dataset,\footnote{Provided at \url{https://collegescorecard.ed.gov/data/}.} which contains data by year from 1996 to 2013 on a variety of measures of student performance, earnings and debt. As discussed, our goal was to determine the influence of certain financial variables on measures of student success. To this extent, we trained several machine learning classifiers with the financial data from the Delta Cost Project as our features, in an attempt to predict the differentials of student success, calculated from the College Scorecard dataset. We used two classifiers, and the approach to variable selection and preprocessing differed between the two.
+
+\subsection{Support Vector Machines} 
+Suppose we have a set $\{ f_i^{(t)} \}_{i = 1}^n$ of financial variables drawn from the Delta Cost Project database. For example, one of these may be the amount of private contributions to a university during the year $t$.  
+\subsubsection{Variable Selection} 
+\subsubsection{Data Preprocessing}
+	
+\end{document}
