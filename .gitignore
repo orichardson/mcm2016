@@ -1,6 +1,8 @@
 */__*
 data/scorecard/*
 data/finances/*
+data/given/*.csv
+data/given/*.xls
 paper/*.aux
 paper/*.log
 paper/*.out
