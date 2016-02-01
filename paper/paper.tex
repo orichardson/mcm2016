@@ -1,6 +1,8 @@
 \documentclass[11pt]{article}
 
-%\usepackage{parskip}
+\edef\restoreparindent{\parindent=\the\parindent\relax}
+\usepackage{parskip}
+\restoreparindent
 \usepackage{bbm}
 
 \usepackage{enumitem}
