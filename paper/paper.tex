@@ -1,6 +1,8 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt, reqno]{amsart}
 
-%\usepackage{parskip}
+\edef\restoreparindent{\parindent=\the\parindent\relax}
+\usepackage{parskip}
+\restoreparindent
 \usepackage{bbm}
 
 \usepackage{enumitem}
@@ -10,6 +12,10 @@
 \usepackage{wallpaper}
 \usepackage{subfiles}
 \usepackage{tikz}
+\usepackage{fancyvrb}
+
+\usepackage{etoolbox}
+\patchcmd{\section}{\scshape}{\Large\scshape}{}{}
 
 \usepackage[width=6.5in,height=9.5in]{geometry}
 
@@ -57,7 +63,7 @@
 
 \begin{document}
 	\thispagestyle{empty}
-	\ThisULCornerWallPaper{1}{ExampleSummarySheet.pdf}
+	\ThisULCornerWallPaper{1}{54328sum.pdf}
 	% Make sure you replace this .pdf file with *your* summary sheet 
 	
 	\ \vspace{7cm}
@@ -75,12 +81,11 @@
 %%%%%%%%%%%%%%%%%%% Now, we just include each of the sections. %%%%%%%%%%%%%%%%%%
 	\subfile{intro}
 	\subfile{model}
-<<<<<<< HEAD
-	\subfile{funds}
-=======
+
+	\subfile{work_appendix}
 	\subfile{ml}
->>>>>>> 0a51c4466406666ef055dd4ea9e1c87ec97d4b23
+	\subfile{cluster}
+	\subfile{funds}
 	\subfile{results}
 	
 \end{document}
-\grid
