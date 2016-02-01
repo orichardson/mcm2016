@@ -46,6 +46,7 @@ def makePlots(Z):
 	x2d = pca.fit_transform(X1.T)
 	
 	labels = {}
+	centers = []
 	
 	for n in [2, 3, 5, 10]:
 		agglo = FeatureAgglomeration(n_clusters=n).fit(X1)
@@ -55,12 +56,13 @@ def makePlots(Z):
 		km = KMeans(n_clusters=n).fit(X1.T)
 		labels['km%d'%n] = km.labels_
 		plot(x2d, km.labels_, "K-Means")
+		centers = km.cluaster_centers_
 	
 	dbs = DBSCAN(eps = 100 ,min_samples=10).fit(X1.T)
 	labels['DBSCAN'] = dbs.labels_
 	plot(x2d, dbs.labels_, "DBSCAN")
 		
-	return labels
+	return labels, centers
 	
 
 def compareLabels(l1, l2) :

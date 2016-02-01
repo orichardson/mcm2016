@@ -1,0 +1,10 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: paper.aux
+The style file: acm.bst
+Database file #1: ../research/references.bib
+Database file #2: references.bib
+Repeated entry---line 2 of file references.bib
+ : @article{greenwald1996effect
+ :                             ,
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "univariate"
+(There was 1 error message)
