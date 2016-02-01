@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.preprocessing import Imputer, StandardScaler
 from sklearn.grid_search import GridSearchCV
-from sklearn.svm import SVC
+from sklearn.svm import SVR
 from sklearn import cross_validation
 import numpy as np
 

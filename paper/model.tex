@@ -2,13 +2,6 @@
 
 \documentclass[paper.tex]{subfiles}
 
-\newcommand{\UU}{\mathcal{U}}
-\newcommand{\D}{\mathcal{D}}
-\newcommand{\V}{\mathcal{V}}
-\newcommand{\T}{\mathcal{T}}
-\newcommand{\W}{\mathcal{W}}
-
-
 \begin{document}
 
 %	\section{The Model}
@@ -24,7 +17,11 @@
 		\item[($\D$)] Financial space. In general, this is the space of donations -- this might have multiple dimensions over $\Re$, depending on the specific categories of money we're interested in. It might also contain certain categories of expenditures that we might be able to influence by placing constraints on how institutions are allowed to spend their money.  
 		\item[($\T$)] The space of times for which we have data. 
 		\item[($\V$)] The vector space of student metric variables $\{v_i\}$. Note that at this point, we have not yet committed ourselves to any such choice of variables, and so $\V$ includes also negative and neutral indicators of success.
-		\item[($d\V)$] In a continuous setting, this would be the $\V$ differential 1-form, but here it is simply a running difference of the variables $\V$ over time.  
+		\item[($\dV)$] In a continuous setting, this would be the time derivative of  $\V$, but here it is simply a running difference of the variables $\V$ over time.  
+	\end{itemize}
+	
+	\begin{itemize}[leftmargin=6em]
+		\item[($S : \UU\to\Re$)] A measure of the Return on Investment (ROI) of a given institution
 	\end{itemize}
 			
 	We will also be interested in a ``sliding window'' of times trailing a given time; if we're interested in a subspace of time $T \subset \T$, we can construct this window as $\W_T : T  \to \D$. Note that in the case of a discrete $T$, comprised of $n$ time steps, $\W_T = \D^n$. All of our data is discrete, of course, but this construction also works for continuous subspaces of $\T$, which means we can think of different choices of $T$ as appropriate approximations, instead of sets with fundamentally different structures. It is also useful to include a shorthand several particularly important parameters
@@ -36,7 +33,7 @@
 	
 	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions. Here's our first and most central one: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while technically invalid, it seems very natural to judge an institution by its past performance -- indeed, this is the best we can hope for from a dataset}. For an institution $u \in \UU$, we can now talk about the effect of donor money over time on the variables in $\V$ as a mapping
 	\begin{equation}
-		F_u: \W_T \to d\V \label{F}
+		F_u: \W_T \to \dV \label{F}
 	\end{equation} 	
 	That is -- a function which takes the financial input we control, and changes student metric variables in some way. This is to be distinguished from some other function $\phi_u: \W_T \to \V$ that estimates the metric variables directly. There are several reasons for this. First of all, it makes a lot more semantic sense; we can't directly impact the absolute value of the these variables with money; at best, we nudge them in one direction or another. Secondly, training on the raw values incentivizes memorizing institutions' particular statistics instead of learning a general pattern. Speaking of which, to get this kind of general pattern instead of one for each school, we are actually learning an alternate formulation of (\ref{F}) -- 
 	\[F: \W_T \times \UU \to d\V \]
@@ -47,18 +44,15 @@
 	\end{equation}
 	be an aggregation function, which produces an objective ``goodness'' of a given array of metric variables. Note that here we use $\V$, not $d\V$, even after making such a point of doing precisely the opposite with respect to $F$. We do this because, \emph{a priori}, it is possible that schools have intrinsic properties that impact the effectiveness of donations, but which do not actually themselves change with respect donation amounts. This is pretty inconvenient, because we really wanted to compose $A$ with $F$ to get a complete function with which to score elements of $\D$. For a moment, we'll suppose that we had the hypothetical function $\phi$ described above. In that case, we have
 	\[ \W_T \overset{\phi}{\to} \V \overset{A}{\to} \Re \] 
-	\ldots but this isn't exactly the metric we're after. Instead of measuring the effectiveness of a contribution, we have some absolute measure of how ``good'' a school would be with a given donation distribution.
+	\ldots but this still isn't exactly the metric we're after. We have some absolute value of a school with a given donation distribution $w_T \in W_T$, but we'd really like to look at how quickly the composite function $(A \circ \phi)$ changes with respect to additional donations. Replacing $\phi$ with its description in terms of its differential, we obtain a scoring algorithm that looks like this:
 	\begin{equation}
-		\argmax_{u \in \UU}~ \frac{d}{dM_u} A\left(V_u + \int_{T} F(w_T, u)\right)
+		S(u) =  \frac{d}{dM_u} A\left(V_u + \int_{T} F(w_T, u)~dt\right)
 	\end{equation}
-	where $V_u \in \V$ is the most current metric vector for university $u$.  
-	\begin{align*}
-		&=\argmax_{u \in \UU}~ \frac{d}{dM_u} A\left(V_u + \int_{T} F(w_T, u)\right) \\
-		&=\argmax_{u \in \UU}~  A'\left(V_u + \int_{T} F(w_T, u)\right)\frac{d}{dM_u}\int_{T} F(w_T, u) \\
-		&=\argmax_{u \in \UU}~  A'\left(V_u + \int_{T} F(w_T, u)\right)\int_{T} \frac{\partial F}{\partial M_u}(w_T, u) \\
-		&=\argmax_{u \in \UU}~  A'\left(V_u + \int_{T} F(w_T, u)\right)\int_{T} F'(w_T, u) \frac{\partial w_T}{\partial M_u} \\
-	\end{align*}
+	where $V_u \in \V$ is the most current metric vector for university $u$. Now, we can do some multi-variable calculus magic to get something easier to calculate.
+
 	\begin{enumerate}
 		\item Apply Machine Learning techniques to estimate the effect of donations on the 
 	\end{enumerate}
+	
+	
 \end{document}

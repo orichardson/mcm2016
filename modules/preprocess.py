@@ -45,7 +45,7 @@ def load(kind='scorecard', numeric_only=True, sort=False):
 	df = pd.read_csv("data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
-		df = df.select_dtypes(include=['int64', 'float64'])
+         df = df.select_dtypes(include=['int64', 'float64'])
 	if sort:
 		df.sort_values('unitid', inplace=True, kind='heapsort')
 
