@@ -45,11 +45,16 @@ def load(kind='scorecard', numeric_only=True, sort=False):
 	df = pd.read_csv("data/processed/{0}_train.csv".format(kind))
 	
 	if numeric_only:
-         df = df.select_dtypes(include=['int64', 'float64'])
+		df = df.select_dtypes(include=['int64', 'float64'])
 	if sort:
 		df.sort_values('unitid', inplace=True, kind='heapsort')
 
 	return df
+
+def fload():
+	X = load('finances')
+	Y = load('scorecard')
+	return remove_undesirable(X, Y)
 	
 
 # distribution of years
@@ -117,8 +122,10 @@ def flatten_catdat(X, category):
 	encoder = Pipeline([ ('label_enc', label_enc), ('hot', hot_enc)]) 
 	return flattened, X, encoder
 	
-def remove_undesirable(X, x_columns, Y, y_columns):	
-	return (X.drop(x_columns), Y.drop(y_columns))
+def remove_undesirable(X, Y):	
+	X_keep = ['private03', 'institutional_grant_aid', 'instruction01', 'research01', 'pubserv01', 'studserv01', 'instsupp01']
+	Y_keep = [ 'GRAD_DEBT_MDN', 'PCTPELL','OVERALL_YR3_N','OVERALL_YR4_N','OVERALL_YR6_N','OVERALL_YR8_N','C150_4','C150_L4','COMP_ORIG_YR2_RT','COMP_ORIG_YR3_RT','COMP_ORIG_YR4_RT','COMP_ORIG_YR6_RT','COMP_ORIG_YR8_RT','DEP_ENRL_ORIG_YR2_RT','DEP_ENRL_ORIG_YR3_RT','DEP_ENRL_ORIG_YR4_RT','DEP_ENRL_ORIG_YR6_RT','DEP_ENRL_ORIG_YR8_RT','DEP_WDRAW_ORIG_YR2_RT','DEP_WDRAW_ORIG_YR3_RT','DEP_WDRAW_ORIG_YR4_RT','DEP_WDRAW_ORIG_YR6_RT','DEP_WDRAW_ORIG_YR8_RT','WDRAW_ORIG_YR2_RT','WDRAW_ORIG_YR3_RT','WDRAW_ORIG_YR4_RT','WDRAW_ORIG_YR6_RT','WDRAW_ORIG_YR8_RT','COSTT4_A','COSTT4_P','TUITIONFEE_IN','TUITIONFEE_OUT','AVGFACSAL','PFTFAC','INEXPFTE','CONTROL','TUITFTE','faminc','faminc_ind','UG','RET_FT4','RET_PT4','RET_FTL4','RET_PTL4','UGDS','pell_ever' ]
+	return X[ X_keep ], Y[ Y_keep ]
 	
 def prepare_data(X, Y, window=5):
 	"""assumes X, Y are datasets with the same schools in them, with all categorical variables flattened and the school variables in the very front"""
