@@ -1,4 +1,4 @@
-\documentclass[11pt]{amsart}
+\documentclass[11pt, reqno]{amsart}
 
 \edef\restoreparindent{\parindent=\the\parindent\relax}
 \usepackage{parskip}
@@ -12,6 +12,9 @@
 \usepackage{wallpaper}
 \usepackage{subfiles}
 \usepackage{tikz}
+
+\usepackage{etoolbox}
+\patchcmd{\section}{\scshape}{\Large\scshape}{}{}
 
 \usepackage[width=6.5in,height=9.5in]{geometry}
 
@@ -36,7 +39,7 @@
 \setlength{\skip\footins}{2cm}
 
 \renewcommand{\Re}{\mathbbm{R}}
-\newcommand{\U}{\mathcal{U}}
+\newcommand{\UU}{\mathcal{U}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\V}{\mathcal{V}}
 \newcommand{\T}{\mathcal{T}}
@@ -77,8 +80,9 @@
 %%%%%%%%%%%%%%%%%%% Now, we just include each of the sections. %%%%%%%%%%%%%%%%%%
 	\subfile{intro}
 	\subfile{model}
+	\subfile{work_appendix}
 	\subfile{ml}
+	\subfile{cluster}
 	\subfile{results}
 	
 \end{document}
-\grid
