@@ -126,8 +126,9 @@ def flatten_catdat(X, category):
 	return flattened, X, encoder
 	
 def remove_undesirable(X, Y):	
-	X_keep = ['unitid', 'academicyear', 'private03', 'institutional_grant_aid', 'instruction01', 'research01', 'pubserv01', 'studserv01', 'instsupp01']
-	Y_keep = [ 'unitid', 'academicyear', 'GRAD_DEBT_MDN', 'PCTPELL','OVERALL_YR3_N','OVERALL_YR4_N','OVERALL_YR6_N','OVERALL_YR8_N','C150_4','C150_L4','COMP_ORIG_YR2_RT','COMP_ORIG_YR3_RT','COMP_ORIG_YR4_RT','COMP_ORIG_YR6_RT','COMP_ORIG_YR8_RT','DEP_ENRL_ORIG_YR2_RT','DEP_ENRL_ORIG_YR3_RT','DEP_ENRL_ORIG_YR4_RT','DEP_ENRL_ORIG_YR6_RT','DEP_ENRL_ORIG_YR8_RT','DEP_WDRAW_ORIG_YR2_RT','DEP_WDRAW_ORIG_YR3_RT','DEP_WDRAW_ORIG_YR4_RT','DEP_WDRAW_ORIG_YR6_RT','DEP_WDRAW_ORIG_YR8_RT','WDRAW_ORIG_YR2_RT','WDRAW_ORIG_YR3_RT','WDRAW_ORIG_YR4_RT','WDRAW_ORIG_YR6_RT','WDRAW_ORIG_YR8_RT','COSTT4_A','COSTT4_P','TUITIONFEE_IN','TUITIONFEE_OUT','AVGFACSAL','PFTFAC','INEXPFTE','CONTROL','TUITFTE','faminc','faminc_ind','UG','RET_FT4','RET_PT4','RET_FTL4','RET_PTL4','UGDS','pell_ever' ]
+	both = ['unitid', 'academicyear']
+	X_keep = both + list( x.rstrip() for x in open('../data/finances/xvars.txt') )
+	Y_keep = both + list( y.rstrip() for y in open('../data/scorecard/yvars.txt') )
 	return X[ X_keep ], Y[ Y_keep ]
 	
 def prepare_data(X, Y, window=5):
