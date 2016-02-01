@@ -25,12 +25,12 @@
 \usepackage{color}
 \definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
 \definecolor{darkblue}{rgb}{0,0,0.4}
-%\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+\hypersetup{linkcolor=red,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
 
 % header and footer 
 \usepackage{fancyhdr}
 \usepackage{lastpage}
-%\pagestyle{fancy}
+\pagestyle{fancy}
 \fancyhf{} % Removes everything
 \lhead{Team \# 54328}
 \rhead{Page \thepage\ of \pageref*{LastPage}}
@@ -95,5 +95,8 @@
 	\subfile{cluster}
 	\subfile{funds}
 	\subfile{results}
+	
+	\bibliographystyle{acm}
+	\bibliography{../research/references,references}
 	
 \end{document}

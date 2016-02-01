@@ -44,33 +44,36 @@
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_3.png}
 	
 	For three clusters, the two clustering algorithms continue to select overwhelmingly similar classes, but assign them different labels. To compute accuracy scores, we use 
-	\[ agreement\Big(L = \{l_i\}, K = \{k_i\} \Big) =  \max_{\sigma \in P(L)} \frac{1}{|L|} \sum_i  \Big(\delta_{k_i, \sigma(l_i)} \Big) \]
+	\[ \nu\Big(L = \{l_i\}, K = \{k_i\} \Big) =  \max_{\sigma \in P(L)} \frac{1}{|L|} \sum_i  \Big(\delta_{k_i, \sigma(l_i)} \Big) \]
 	where $P(L)$ is the permutation group on the number of unique elements of $L$ 
 	
 	\includegraphics[width=0.5\linewidth]{images/clusters_km_5.png}
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_5.png}
 	
-	Note that some of the clusters are a lot smaller than others
+	Note that some of the clusters are a lot smaller than others, and the separation of the clusters becomes less clear. The \textit{silhouette score} of a given clustering is a one way of formalizing this \cite{silhouette} -- if $d_a$ is the mean intra-sample distance and $d_o$ is the mean minimum between cluster centers, then the silhouettes score can be calculated by
+	\[ \mu(d_o, d_a) = \frac{d_a - d_o}{\max ( d_a, d_o) }\]
+	The image of $\mu$ is $[-1, 1]$, where positive scores indicate good separation, values near zero indicate overlapping clusters, and negative values indicate a poor grouping. As we ask for more than $5$ clusters, the silhouette scores tend to decrease (Table \ref{t1}), suggesting that five cluters is a natural splitting for the traits in $\V$.
 
 	\includegraphics[width=0.5\linewidth]{images/clusters_km_10.png}
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_10.png}
 	
+	The corresponding statistics for these charts are summarized in the table below.
+	
 	\begin{table}[!h]
 		\caption{Cluster Statistics}
-		\def\arraystretch{1.3}%  1 is the default, change whatever you need
+		\def\arraystretch{1.2}%  1 is the default, change whatever you need
 		\begin{tabular}{r||cc|cc|cc|cc|}
-			 & Agglo 2 & K-Means 2 & Agglo 3 & K-Means 3 & Agglo 5 &  K-Means 5 & Agglo 10 & K-Means 10\\\hline
-		silhouette & 0.050 & 0.057 & 0.044 & 0.052 & 0.059 & 0.070 & 0.100 & 0.100 \\
-	 agreement  & \multicolumn{2}{|c|}{0.95} & \multicolumn{2}{|c|}{0.88} & \multicolumn{2}{|c|}{0.79}& \multicolumn{2}{|c|}{0.81}\\\hline
-		\end{tabular}
+			 &\small Agglo 2 &\small K-Means 2 &\small Agglo 3 &\small K-Means 3 &\small Agglo 5 &\small  K-Means 5 &\small Agglo 10 &\small K-Means 10\\\hline
+		\small silhouette ($\mu$)& 0.050 & 0.057 & 0.044 & 0.052 & 0.059 & 0.070 & 0.100 & 0.100 \\
+		\small agreement ($\nu$)  & \multicolumn{2}{|c|}{0.95} & \multicolumn{2}{|c|}{0.88} & \multicolumn{2}{|c|}{0.79}& \multicolumn{2}{|c|}{0.81}\\\hline
+		\end{tabular}		\label{t1}
 	\end{table}
 		
-	\subsection{Models to Assign Weights}
-	The simplest model to consider is a linear one:
+	\subsection{Assigning Weights.}
+	The simplest and most natural model to consider is the linear one:
 	\[A(v) = \sum_i a_i v_i \]
-	where $a_i \in \Re$. 
+	where $a_i \in \Re$ representing the weight of each $v_i$. The interesting piece, of course, is determining the actual weights $\{a_i\}$. Now that we have clusters of values, we have humans select the top three positive indicators, and top three negative indicators of student success. Each cluster receives an impact score of +1 for having one of the best positive indicators, and an impact score of -1 for each one of the worst 
 	
 	
-	\subsection{Seeding the cluster data}
 	
 \end{document}

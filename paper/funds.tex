@@ -21,20 +21,13 @@
 	\\
 	
 	The second utility function falls under the category of isoelastic functions. Isoelastic functions return the same utility when scaled by an additive factor. \cite{norstad1999introduction}
-	An important criterion for a successful isoelastic function is that the function has a negative second derivative, i.e. the function is concave down. ($ \frac{d^2a}{db^2} < ($0$) $)
-	This means that our utility can be easily optimized within its boundary. 
-	\\\\
-	A common isoelastic function is the natural logarithm. The natural logarithm meets the important criterion: $ \frac{d^2(ln|b|)}{db^2} = \frac{-1}{b^2} $ is less than one. However, a simple logarithm goes to negative $\infty$ at $0$, so we adjust by adding a factor of $1$ to the argument. Thus, our utility function for this model will be:
-	
+	An important criterion for a successful isoelastic function is that the function has a negative second derivative, i.e. the function is concave down.  \[\frac{d^2a}{db^2} < 0\] 
+	This means that our utility can be easily optimized within its boundary. A common isoelastic function is the natural logarithm. The natural logarithm meets the important criterion: \[\frac{d^2(ln|b|)}{db^2} = \frac{-1}{b^2}\]  is less than one. However, a simple logarithm goes to negative $\infty$ at $0$, so we adjust by adding a factor of $1$ to the argument. Thus, our utility function for this model will be:
 	$$ Q(M) = S(ln|M+1|) $$
 	We sum over all universities competing for grant money:
-	
 	$$ \sum_{U} Q(M_{U})  = \sum_{U} S_{U}(ln|M_{U}+1|)  $$
-	
 	In order to award the largest sum of grant money to the school with the highest $S$ value, we optimize all $Q$ values by taking their derivatives with respect to all $M$ values.
-	
 	$$ \frac{d}{dM_{U}} \sum_{U}Q(M_{U})  = \sum_{U}\frac{S_{U}}{M_{U}} $$
-	
 	However, the derivative of the utility function with respect to $M$ and summed over all values of $M$ is simply the gradient of $Q$,
 	$$ \frac{d}{dM_{U}} \sum_{U}Q(M_{U}) = \vec{\nabla} Q_{U}   $$
 	and if we write our $S$ to $M$ ratio in vector form, we have:
@@ -82,7 +75,7 @@
  	
  	This utility function is very similar to the first logarithmic function discussed. The function now has a value of zero at zero. Points near the beginning of the graph are concave up, meaning that an increase in grant money will not impact the utility as greatly as it did in the previous model. The utility function can be solved for $M$ in the same fashion as before, producing:
  	
- 	$$ M(S) = (P^2+1) \dfrac{(\sqrt{S^2 - \dfrac{(P - \sqrt{P^2S^2 + S^2 - 1})^2}{(P^2 + 1)^2}} -1)}{P - \sqrt{P^2S^2 + S^2 - 1}}$$
+ 	$$ M(S) = (P^2+1) \dfrac{\left(\sqrt{S^2 - \dfrac{(P - \sqrt{P^2S^2 + S^2 - 1})^2}{(P^2 + 1)^2}} -1\right)}{P - \sqrt{P^2S^2 + S^2 - 1}}$$
 	
 	%\begin{tikzpicture}
 %	\begin{axis}[ 
