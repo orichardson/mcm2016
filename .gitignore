@@ -4,8 +4,9 @@ data/finances/*
 paper/*.aux
 paper/*.log
 paper/*.out
-paper/*.pdf
 paper/*.synctex.gz
+paper/*.pdf
+!paper/54328sum.pdf
 *.csv
 *.swp
 *.swo
