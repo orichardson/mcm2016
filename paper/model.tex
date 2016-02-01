@@ -13,7 +13,7 @@
 	
 	
 	\begin{itemize}
-		\item[($\U$)] The set of universities and colleges in question.
+		\item[($\UU$)] The set of universities and colleges in question.
 		\item[($\D$)] Financial space. In general, this is the space of donations -- this might have multiple dimensions over $\Re$, depending on the specific categories of money we're interested in. It might also contain certain categories of expenditures that we might be able to influence by placing constraints on how institutions are allowed to spend their money.  
 		\item[($\T$)] The space of times for which we have data. 
 		\item[($\V$)] The vector space of student metric variables $\{v_i\}$. Note that at this point, we have not yet committed ourselves to any such choice of variables, and so $\V$ includes also negative and neutral indicators of success.
@@ -21,7 +21,7 @@
 	\end{itemize}
 	
 	\begin{itemize}[leftmargin=6em]
-		\item[($S : \U\to\Re$)] A measure of the Return on Investment (ROI) of a given institution
+		\item[($S : \UU\to\Re$)] A measure of the Return on Investment (ROI) of a given institution
 	\end{itemize}
 			
 	We will also be interested in a ``sliding window'' of times trailing a given time; if we're interested in a subspace of time $T \subset \T$, we can construct this window as $\W_T : T  \to \D$. Note that in the case of a discrete $T$, comprised of $n$ time steps, $\W_T = \D^n$. All of our data is discrete, of course, but this construction also works for continuous subspaces of $\T$, which means we can think of different choices of $T$ as appropriate approximations, instead of sets with fundamentally different structures. It is also useful to include a shorthand several particularly important parameters
@@ -31,12 +31,12 @@
 		\item[($M_u \in \mathcal{M}$)] The total amount of money given to university $u$ over the entire time $T$
 	\end{itemize}
 	
-	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions. Here's our first and most central one: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while technically invalid, it seems very natural to judge an institution by its past performance -- indeed, this is the best we can hope for from a dataset}. For an institution $u \in \U$, we can now talk about the effect of donor money over time on the variables in $\V$ as a mapping
+	With this framework, we can now formulate the problem more precisely. To do any kind of induction at all, it is necessary to make some commonplace but sometimes very wrong independence assumptions. Here's our first and most central one: we will assume that the effectiveness with which an institution can use money does not change over time\footnote{This is a reasonable assumption to make; while technically invalid, it seems very natural to judge an institution by its past performance -- indeed, this is the best we can hope for from a dataset}. For an institution $u \in \UU$, we can now talk about the effect of donor money over time on the variables in $\V$ as a mapping
 	\begin{equation}
 		F_u: \W_T \to \dV \label{F}
 	\end{equation} 	
 	That is -- a function which takes the financial input we control, and changes student metric variables in some way. This is to be distinguished from some other function $\phi_u: \W_T \to \V$ that estimates the metric variables directly. There are several reasons for this. First of all, it makes a lot more semantic sense; we can't directly impact the absolute value of the these variables with money; at best, we nudge them in one direction or another. Secondly, training on the raw values incentivizes memorizing institutions' particular statistics instead of learning a general pattern. Speaking of which, to get this kind of general pattern instead of one for each school, we are actually learning an alternate formulation of (\ref{F}) -- 
-	\[F: \W_T \times \U \to \dV \]
+	\[F: \W_T \times \UU \to d\V \]
 	
 	Supposing that we have a suitably robust approximation for $F$, we still have a ways to go in terms of allocating resources. The biggest, most glaring issue is that we still haven't decided what makes a given change $d\V$ a \emph{positive} one. The mechanism for determining this will be discussed at length later in the paper, but here we will just give it a name. Let
 	\begin{equation}

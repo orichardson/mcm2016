@@ -1,27 +1,17 @@
-import numpy as np
+import tensorflow.models.rnn.seq2seq as seq2seq
+from tensorflow.models.rnn import rnn_cell
 
-from keras.models import Sequential
-from keras.layers.core import Dense, Activation
-from keras.layers.recurrent import LSTM
+from sklearn.pipeline import Pipeline
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.preprocessing import Imputer, StandardScaler
 
-import pandas as pd
+import skflow
 
-import sys
-sys.path.insert(0, "../modules")
+#encoder_inputs: a list of 2D Tensors [batch_size x cell.input_size].
+#decoder_inputs: a list of 2D Tensors [batch_size x cell.input_size].
+window = 5
 
-import preprocess
-import collections
+pipeline = Pipeline(zip([ "imputate", "vart", "scale", "svm" ], [ Imputer(), VarianceThreshold(), StandardScaler(), clf ]))
+   
 
-def rnn_model():
-	in_neurons=1008	
-	out_neurons=441
-	hidden_neurons = 30
-	model = Sequential()
-	model.add(LSTM(input_dim=in_neurons, output_dim=hidden_neurons, return_sequences=False))
-	model.add(Dense(input_dim=hidden_neurons, output_dim=out_neurons))
-	model.add(Activation("sigmoid"))
-	model.compile(loss="mean_squared_error", optimizer="rmsprop")
-
-
-def train_RNN(X, Y):
-	pass
+model = seq2seq.embedding_rnn_seq2seq(encoder_inputs, decoder_inputs, rnn_cell.GRUCell(num_units), window, 441)

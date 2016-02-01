@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{amsart}
 
 \edef\restoreparindent{\parindent=\the\parindent\relax}
 \usepackage{parskip}
@@ -17,7 +17,7 @@
 
 
 % colored PDF links
-\usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref} 
+\usepackage[bookmarks,colorlinks,breaklinks]{hyperref} 
 \usepackage{color}
 \definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
 \definecolor{darkblue}{rgb}{0,0,0.4}
@@ -77,6 +77,8 @@
 %%%%%%%%%%%%%%%%%%% Now, we just include each of the sections. %%%%%%%%%%%%%%%%%%
 	\subfile{intro}
 	\subfile{model}
+	\subfile{ml}
 	\subfile{results}
 	
 \end{document}
+\grid
