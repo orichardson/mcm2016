@@ -7,7 +7,6 @@ paper/*.out
 paper/*.synctex.gz
 paper/*.pdf
 !paper/54328sum.pdf
-*.csv
 *.swp
 *.swo
 *_test.csv

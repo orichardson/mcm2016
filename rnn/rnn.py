@@ -8,12 +8,11 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 '''
 
 # Import MINST data
-import input_data
-mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
 import tensorflow as tf
 from tensorflow.models.rnn import rnn, rnn_cell
 import numpy as np
+from mcm import rnn_mcm_baker
 
 '''
 To classify images using a reccurent neural network, we consider every image row as a sequence of pixels.
@@ -27,10 +26,11 @@ batch_size = 128
 display_step = 10
 
 # Network Parameters
-n_input = len(X[0, :]) # MNIST data input (img shape: 28*28)
+data = rnn_mcm_baker()
+n_input = len(data.Xlen) # MNIST data input (img shape: 28*28)
 n_steps = None # timesteps
 n_hidden = 32 # hidden layer num of features
-n_output = len(Y[0, :]) # MNIST total classes (0-9 digits)
+n_output = len(data.Ylen) # MNIST total classes (0-9 digits)
 
 # tf Graph input
 x = tf.placeholder("float", [None, n_steps, n_input])

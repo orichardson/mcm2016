@@ -51,9 +51,12 @@ def load(kind='scorecard', numeric_only=True, sort=False):
 
 	return df
 
-def fload():
-	X = pd.read_csv("data/processed/finances_train.csv")
-	Y = pd.read_csv("data/processed/scorecard_train.csv")
+def fload(small=False):
+	nrows = None
+	if small:
+		nrows = 10000
+	X = pd.read_csv("data/processed/finances_train.csv", nrows=nrows)
+	Y = pd.read_csv("data/processed/scorecard_train.csv", nrows=nrows)
 	X, Y = remove_undesirable(X, Y)
 	X = X.select_dtypes(include=['int64', 'float64'])
 	Y = Y.select_dtypes(include=['int64', 'float64'])
@@ -127,8 +130,8 @@ def flatten_catdat(X, category):
 	
 def remove_undesirable(X, Y):	
 	both = ['unitid', 'academicyear']
-	X_keep = both + list( x.rstrip() for x in open('../data/finances/xvars.txt') )
-	Y_keep = both + list( y.rstrip() for y in open('../data/scorecard/yvars.txt') )
+	X_keep = both + list( x.rstrip() for x in open('data/finances/xvars.txt') )
+	Y_keep = both + list( y.rstrip() for y in open('data/scorecard/yvars.txt') )
 	return X[ X_keep ], Y[ Y_keep ]
 	
 def prepare_data(X, Y, window=5):
@@ -154,8 +157,8 @@ def prepare_data(X, Y, window=5):
 			Y_data = Y.iloc[i, :] - Y.iloc[i, :]
 		X_school = pipe.transform(school)
 		idx = np.where(X_school == 1)[0][0]
-		indices = np.where(flattened[:, idx] == 1)[0].tolist()	
-		X_data = X.iloc[:, indices][(X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
+		#indices = np.where(flattened[:, idx] == 1)[0].tolist()	
+		X_data = X[(X[:,i] == idx) & (X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
 		# removes school data from the Y value
 		data.append((hstack([X_school, dok_matrix(np.matrix(X_data.values).flatten())]), np.matrix(Y_data)))
 	print(len(data))
