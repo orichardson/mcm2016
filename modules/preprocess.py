@@ -153,12 +153,10 @@ def prepare_data(X, Y, window=5):
 			Y_data = Y.iloc[i, :] - Y.iloc[i, :]
 		X_school = pipe.transform(school)
 		idx = np.where(X_school == 1)[0][0]
-		X_data = X[X.iloc[:, idx] == 1 & (X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
+		indices = np.where(flattened[:, idx] == 1)[0].tolist()	
+		X_data = X.iloc[:, indices][(X['academicyear'] <= year - 1) & (X['academicyear'] >= year - window)]
 		# removes school data from the Y value
-		try:
-			data.append((hstack([X_school, dok_matrix(np.matrix(X_data.values).flatten())]), np.matrix(Y_data)))
-		except:
-			pass
+		data.append((hstack([X_school, dok_matrix(np.matrix(X_data.values).flatten())]), np.matrix(Y_data)))
 	print(len(data))
 		
 

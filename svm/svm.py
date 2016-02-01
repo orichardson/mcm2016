@@ -14,7 +14,7 @@ def train_SVM(X, Y, kernel='rbf', shrinking=True,  tol=0.001, cache_size=1500, v
 	"""Assumes all irrelevant features have been removed from X and Y"""
 	"""Learns several hundred SVMs"""
 
-	clf = SVC(kernel=kernel, tol=tol, cache_size=cache_size, verbose=verbose, max_iter=max_iter)
+	clf = SVR(kernel=kernel, tol=tol, cache_size=cache_size, verbose=verbose, max_iter=max_iter)
 	pipeline = Pipeline(zip([ "imputate", "vart", "scale", "svm" ], [ Imputer(), VarianceThreshold(), StandardScaler(), clf ]))
 	
 	param_grid = dict(svm__C=[0.1, 1, 10, 100, 1000],
