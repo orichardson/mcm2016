@@ -1,5 +1,6 @@
 % !TeX root = funds.tex
 \documentclass[paper.tex]{subfiles}
+\usepackage{pgfplots}
 
 \begin{document}
 	\section{Allocation of Funds}
@@ -17,7 +18,7 @@
 	There are several classes of utility functions that are commonly used in microeconomics. We will examine several utility functions in order to determine the function best fit for our situation. First let us consider a linear utility function.
 	$$ Q(M) = SM $$
 	This function fits our model in some ways. The university with the largest amount of money will still receive the most grant money, but their allotment of money will be equivalent to $P$. This model assumes that the highest-scoring school will always be the best and only choice for award, and therefore the entire sum of grant money will go to the number one spot every time. This is, of course, not what we are looking for in a utility function. Let's try something a bit more complex.
-	
+	\\
 	
 	The second utility function falls under the category of isoelastic functions. Isoelastic functions return the same utility when scaled by an additive factor. \cite{norstad1999introduction}
 	An important criterion for a successful isoelastic function is that the function has a negative second derivative, i.e. the function is concave down. ($ \frac{d^2a}{db^2} < ($0$) $)
@@ -74,5 +75,22 @@
 	$$ M_{U} = S_{U}(P+|U|) - 1$$
 	
  	Still, this model is imperfect. It is important that we be allowed to give some universities exactly $0$ dollars, and the logarithmic function does not allow for $M$ values at $0$. Also, this utility function shows great appreciation for changes in $M$ near $0$, i.e. a change in grant award from $0$ to $\$1$ produces a large increase in utility. In reality, such an increase in utility would not occur near $M$ values of $0$, particularly for universities who deal with large sums of money all the time.
+ 	\\
+ 	We can adjust our utility function to account for these imperfections. Consider a the piecewise utility function $Q$:
+ 	
+ 	$$ Q(M) = S(ln|1+M^2|) $$
+ 	
+ 	This utility function is very similar to the first logarithmic function discussed. The function now has a value of zero at zero. Points near the beginning of the graph are concave up, meaning that an increase in grant money will not impact the utility as greatly as it did in the previous model. The utility function can be solved for $M$ in the same fashion as before, producing:
+ 	
+ 	$$ M(S) = (P^2+1) \dfrac{(\sqrt{S^2 - \dfrac{(P - \sqrt{P^2S^2 + S^2 - 1})^2}{(P^2 + 1)^2}} -1)}{P - \sqrt{P^2S^2 + S^2 - 1}}$$
+	
+	%\begin{tikzpicture}
+%	\begin{axis}[ 
+%	xlabel=$S$,
+%	ylabel={$M(S)$}
+%	] 
+%	\addplot {(P^2+1) (\sqrt{S^2 - ({(P - \sqrt{P^2S^2 + S^2 - 1})^2}/{(P^2 + 1)^2} -1)})/{P - \sqrt{P^2S^2 + S^2 - 1}}; 
+%	\end{axis}
+%	\end{tikzpicture}
 	
 \end{document}
