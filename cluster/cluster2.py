@@ -63,3 +63,18 @@ def makePlots(Z):
 	return labels
 	
 
+def compareLabels(l1, l2) :
+	mapping  = {}
+	
+	for i,l in enumerate(l1) :
+		if l in mapping:
+			mapping[l].append(l2[i]) 
+		else:
+			mapping[l] = [l2[i]]
+			
+	for k in mapping.keys():
+		mapping[k] = max(set(mapping[k]), key=mapping[k].count)
+	
+	print(mapping)
+	return sum(l2[i]-mapping[x] == 0 for i, x in enumerate(l1)) / len(l1)
+

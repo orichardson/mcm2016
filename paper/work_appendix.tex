@@ -10,7 +10,7 @@
 		&= \sum_i \frac{\partial A}{\partial v_i}  \left( \int_{T}\frac{\partial }{\partial M_u} f_{i,u}(w_T)~dt\right) \\
 	\intertext{\ldots by Leibeitz' Rule, since the time frame limits of integration do not not depend on $M_u$. Because of the associativity of maps, we can write the composition of $F$ with $w_T$ as a function of $t$: }
 		S(t)&= \sum_i \frac{\partial A}{\partial v_i}  \left( \int_{T}\frac{\partial }{\partial M_u} (f_{i,u} \circ w_T)(t)~dt\right) \\
-		%&= \sum_i \frac{\partial A}{\partial v_i}  \left(~~\iint\limits_{t_1, t_2 \in T} \frac{\partial f_{i,u}}{\partial w_{T(t_2)}(t_1)} \frac{d w_{T(t_2)} (t_1)}{d M_u} ~dt_1\right)
+		&= \sum_i \frac{\partial A}{\partial v_i}  \left(~~\iint\limits_{t_1, t_2 \in T} \frac{\partial f_{i,u}}{\partial w_{T(t_2)}(t_1)} \frac{d w_{T(t_2)} (t_1)}{d M_u} ~dt_1\right)
 	\end{align*}
 	
 	Because of $T$ is discrete, $w_T$ is really just an $n$-vector over $\D$, and so our score function becomes

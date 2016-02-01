@@ -38,21 +38,39 @@
 	\includegraphics[width=0.5\linewidth]{images/clusters_km_2.png}
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_2.png}
 	
-	Much more telling than the visual clustering is the agreement between the two extremely different clustering algorithms. In the case of two clusters, k-means and feature agglomeration have $95.2\%$ agreement.
+	Much more telling than visually distinct spacial separation is the agreement between the two extremely different clustering algorithms. In the case of two clusters, k-means and feature agglomeration have $95.2\%$ agreement.
 
 	\includegraphics[width=0.5\linewidth]{images/clusters_km_3.png}
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_3.png}
 	
-	For three clusters, we still have a very good 
-
+	For three clusters, the two clustering algorithms continue to select overwhelmingly similar classes, but assign them different labels. To compute accuracy scores, we use 
+	\[ agreement\Big(L = \{l_i\}, K = \{k_i\} \Big) =  \max_{\sigma \in P(L)} \frac{1}{|L|} \sum_i  \Big(\delta_{k_i, \sigma(l_i)} \Big) \]
+	where $P(L)$ is the permutation group on the number of unique elements of $L$ 
+	
 	\includegraphics[width=0.5\linewidth]{images/clusters_km_5.png}
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_5.png}
+	
+	Note that some of the clusters are a lot smaller than others
 
 	\includegraphics[width=0.5\linewidth]{images/clusters_km_10.png}
 	\includegraphics[width=0.5\linewidth]{images/clusters_fa_10.png}
+	
+	\begin{table}[!h]
+		\caption{Cluster Statistics}
+		\def\arraystretch{1.3}%  1 is the default, change whatever you need
+		\begin{tabular}{r||cc|cc|cc|cc|}
+			 & Agglo 2 & K-Means 2 & Agglo 3 & K-Means 3 & Agglo 5 &  K-Means 5 & Agglo 10 & K-Means 10\\\hline
+		silhouette & 0.050 & 0.057 & 0.044 & 0.052 & 0.059 & 0.070 & 0.100 & 0.100 \\
+	 agreement  & \multicolumn{2}{|c|}{0.95} & \multicolumn{2}{|c|}{0.88} & \multicolumn{2}{|c|}{0.79}& \multicolumn{2}{|c|}{0.81}\\\hline
+		\end{tabular}
+	\end{table}
 		
 	\subsection{Models to Assign Weights}
 	The simplest model to consider is a linear one:
 	\[A(v) = \sum_i a_i v_i \]
+	where $a_i \in \Re$. 
+	
+	
+	\subsection{Seeding the cluster data}
 	
 \end{document}
