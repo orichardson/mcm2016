@@ -1,0 +1,54 @@
+% !TeX root = funds.tex
+\documentclass[paper.tex]{subfiles}
+
+\begin{document}
+	\section{Allocation of Funds}
+	
+	In order to determine the amount of money allocated to each school, we develop a model that follows utility theory. A utility study is appropriate for our model. Previously, we have determined a score for each university based on their qualifying characteristics. We would like to give more funding to a university with a higher score, thus, the utility of awarding a grant to a high-score school is also high. As scores decrease among universities, smaller and smaller awards will be distributed. We can model this change in award by modeling the utility for each school.
+	\\
+	
+	First, we introduce some nomenclature.
+	\begin{itemize}
+		\item[($Q$)] The utility function
+		\item[($S$)] The score given to each school based on aforementioned algorithms
+		\item[($M$)] The amount of money awarded to a school from the Goodgrant Foundation's \$100,000,000 pool
+		\item[($P$)] total money available to give to schools (\$100,000,000)
+	\end{itemize}
+	There are several classes of utility functions that are commonly used in microeconomics. The class best fit to our situation falls under the category of isoelastic functions. Isoelastic functions return the same utility when scaled by an additive factor. \cite{norstad1999introduction}
+	An important criterion for a successful isoelastic function is that the function has a negative second derivative, i.e. the function is concave down. ($ \frac{d^2a}{db^2} \textless ($0$) $)
+	This means that our utility can be easily optimized within its boundary. 
+	\\\\
+	A common isoelastic function is the natural logarithm. The natural logarithm meets the important criterion: $ \frac{d^2(ln|b|)}{db^2} = \frac{-1}{b^2} $ is less than one. However, a simple logarithm goes to negative $\infty$ at $0$, so we adjust by adding a factor of $1$ to the argument. Thus, our utility function for this model will be:
+	
+	$$ Q(M) = S(ln|M+1|) $$
+	We sum over all universities competing for grant money:
+	
+	$$ \sum_{U} Q(M_{U})  = \sum_{U} S_{U}(ln|M_{U}+1|)  $$
+	
+	In order to award the largest sum of grant money to the school with the highest $S$ value, we optimize all $Q$ values by taking their derivatives with respect to all $M$ values.
+	
+	$$ \frac{d}{dM_{U}} \sum_{U}Q(M_{U})  = \sum_{U}\frac{S_{U}}{M_{U}} $$
+	
+	However, the derivative of the utility function with respect to $M$ and summed over all values of $M$ is simply the gradient of $Q$,
+	$$ \frac{d}{dM_{U}} \sum_{U}Q(M_{U}) = \vec{\nabla} Q_{U}   $$
+	and if we write our $S$ to $M$ ratio in vector form, we have:
+	 
+	$$ \vec{\nabla} Q_{U} =  \left( \begin{array}{c}
+	\frac{S_{1}}{(M_{1}+1)} \\
+	. \\
+	.\\
+	.\\
+	\frac{S_{U}}{(M_{U}+1)}  \end{array} \right) $$
+	\\
+	
+	We are attempting to solve for $M_{U}$ that we may give appropriate amounts of $P$ to each school with a high-enough score. We do not, however, have unlimited funds to allocate to these schools, so we need to generate a boundary parameter:
+	$$ P = \sum_{U} M_{U}   $$
+	
+	This way, the total amount given to all schools will not exceed the amount of money we are allowed to allocate. This is simple economics and budgeting, however, it mathamatical implications allow us to solve for $M$. 
+	\\\\
+	Consider the method of Lagrange multipliers. Given the gradient of a vector field and a boundary condition for that field, Lagrange multipliers allow us to solve for the boundary function using a system of equations.
+	
+		$$\vec{\nabla} Q_{U} = \lambda \vec{\nabla} M_{U}$$\\ $$\sum_{U} M_{U} - P = 0$$ 
+ 	
+	
+\end{document}
