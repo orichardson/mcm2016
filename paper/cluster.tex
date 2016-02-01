@@ -70,9 +70,11 @@
 	\end{table}
 		
 	\subsection{Assigning Weights.}
-	The simplest and most natural model to consider is the linear one:
+	The simplest and most natural model to consider is the linear one \footnote{This also happens to be plenty general enough for our purposes; the dimensionality of the data is so large that }:
 	\[A(v) = \sum_i a_i v_i \]
-	where $a_i \in \Re$ representing the weight of each $v_i$. The interesting piece, of course, is determining the actual weights $\{a_i\}$. Now that we have clusters of values, we have humans select the top three positive indicators, and top three negative indicators of student success. Each cluster receives an impact score of +1 for having one of the best positive indicators, and an impact score of -1 for each one of the worst 
+	where $a_i \in \Re$ representing the weight of each $v_i$. The interesting piece, of course, is determining the actual weights $\{a_i\}$. Now that we have clusters of values, we have humans select the top three positive indicators, and top three negative indicators of student success. Each cluster receives an impact score of +1 for each of the best positive indicators it contains, and an impact score of -1 for each one of the worst predictors it contains. 
+	
+	With each cluster given an impact score.
 	
 	
 	
