@@ -1,0 +1,55 @@
+\documentclass[
+  fontsize=11pt,
+  paper=a4,
+  parskip=half,
+  enlargefirstpage=on,    % More space on first page
+  fromalign=right,        % PLacement of name in letter head
+  fromphone=on,           % Turn on phone number of sender
+  fromrule=aftername,     % Rule after sender name in letter head
+  addrfield=on,           % Adress field for envelope with window
+  backaddress=on,         % Sender address in this window
+  subject=beforeopening,  % Placement of subject
+  locfield=narrow,        % Additional field for sender
+  foldmarks=on,           % Print foldmarks
+]{scrlttr2}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+\setkomafont{fromname}{\sffamily \LARGE}
+\setkomafont{fromaddress}{\sffamily}%% statt \small
+\setkomafont{pagenumber}{\sffamily}
+\setkomafont{subject}{\bfseries}
+\setkomafont{backaddress}{\mdseries}
+
+\LoadLetterOption{DIN}
+\setkomavar{fromname}{54328}
+\setkomavar{fromaddress}{From A Place\\Far Far Away}
+%\setkomavar{fromphone}{+49 0000 0\,00\,00\,00}
+%\setkomavar{fromemail}{from.name@mail.com}
+\setkomavar{backaddressseparator}{\enspace\textperiodcentered\enspace}
+\setkomavar{signature}{(Team 54328)}
+\setkomavar{date}{February 1st}
+\setkomavar{enclseparator}{: }
+
+\begin{document}
+  \begin{letter}{To Mr. Alpha Chiang \\Chief Financial Officer\\ The Goodgrant Foundation}
+    \setkomavar{subject}{An Investment Model}
+    \opening{To Mr. Chiang,}
+
+    Upon your request, our team has created an investment plan for the Goodgrant Foundation using the tools of mathematics and computation. Our model provides you with an optimal investment strategy, including a complete list of ranks for highly qualified universities, a plan for allocating funds to these universities over time, and a simplistic projection for returns on your investments.
+    \\\\
+    The strategy is simple: find universities that consistently prioritize the well-being of their students by providing them with resources and funds, and then rank those universities according to their potential for growth in the arena of student resources. The schools with highest ranks receive the largest grants from the $\$$100,000,000 pool. 
+    \\\\
+    Our model incorporates data from CollegeScoreBoard.com, the U.S. National Center on Education Statistics, and the Delta Project. These three sources together give our model the information it needs to rank the universities, and this information may be collected anew each year to create new ranks for schools in the future. First, the model uses parts of these data to estimate how much money each university currently receives as external donations or grants. This is our first important piece of information. The aforementioned data also include other interesting characteristics about each school, so the second process our model performs is to define how these other characteristics change over time. This can be a good indication of a school's progress and potential as a Goodgrant candidate. The model then classifies all these characteristics into groups based on their similarities. After learning the difference between a "good" and "bad" characteristic for a university interested in a grant, the model ranks each group from best candidate to less candidates. This part of the model removes the traditional review-of-applications method of awarding grants and replaces it with a statistical, nearly unbiased selection. The model finally analyzes the differences in "goodness" given to each university characteristics and maximizes them. The school with the largest potential difference receives a high rank, as this sufficient evidence for a particular school's need for the grant and its potential to use the Foundation's money wisely.
+    \\\\
+    The model predicts that the Goodgrant Foundation's return on investment will be quite high. When it comes to schools with the highest likelihood of producing a strong positive effect on student performance, the schools on our list will make those returns as soon as they receive sufficient funding. Numerous studies have shown that university spending on student resources impacts student success more than any other single factor, including teacher capability and class size. Your donations will have great impact wherever you decide to allocate your funds, but that impact will be optimized by following the suggestion of our model.
+    \\\\
+    As mentioned briefly before, this model can receive new data for future investment explorations. The rank of schools who receive grant money this year will change in the coming years, so a new batch of universities will be selected as grant winners each cycle. 
+    \\\\
+    In sum, we present to you a model that is performs the task of awarding grants without the hassle of examining individual universities for their qualifying factors. The model is versatile, reusable, and will maximize the Goodgrant Foundation's ability to increase student success in universities across the United States. We hope that you will find our model to be useful at the Foundation, and we wish you the happiest of times in awarding grants to worthy universities across the nation! 
+
+    \closing{Sincerely,}
+  \end{letter}
+\end{document}
