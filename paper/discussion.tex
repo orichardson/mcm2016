@@ -6,14 +6,12 @@
 	
 	A related strength is that our model requires very little human input. Aside from a few determinations of "good" and "bad" for variables, humans need not do much work to determine grant-winners, other than perhaps to click a button to run the program.
 	
-	Another strength is that our model consistently makes very general assumptions about the data. We never hand picked any data to specifically analyze, nor did we remove lots of data that met all our criteria. 
+	Another strength is that our model consistently makes very general assumptions about the data. We never hand picked any data to specifically analyze, nor did we remove lots of data that met all our criteria. For example, the machine learning algorithms we utilize reflect natural structure in the data: for instance, the RNNs encode sequentiality and the GRU cells are known to be effective in retaining memory about previous terms in the sequence. Moreover, the data is naturally structured sequentially by constructing a sequence of feature vectors for each university. While the SVMs do not encode this sequentiality as nicely, they encode the priority we should give each financial feature, e.g. importance of revenue spent on administration.
 		
 	\subsection{Weaknesses}
-	The time constraints of this competition made room for many weaknesses in our model.
-	
-	The first weakness is that part (1) of our model, the machine learning algorithm that maps finance data to overall changes in data, took a very long time to train among other things. Some issues we had were that the models 
+	The time constraints of this competition made room for many weaknesses in our model. The first weakness is that part (1) of our model, the machine learning algorithm that maps finance data to overall changes in data, took a very long time to train among other things. Some issues we had were that
 \begin{enumerate}
-\item not training properly, 
+\item the models did not training properly, 
 \end{enumerate}
 because
 \begin{enumerate}[resume]
