@@ -10,22 +10,19 @@
 		&= \sum_i \frac{\partial A}{\partial v_i}  \left( \int_{T}\frac{\partial }{\partial M_u} f_{i,u}(w_T)~dt\right) \\
 	\intertext{\ldots by Leibeitz' Rule, since the time frame limits of integration do not not depend on $M_u$. Because of the associativity of maps, we can write the composition of $F$ with $w_T$ as a function of $t$: }
 		S(t)&= \sum_i \frac{\partial A}{\partial v_i}  \left( \int_{T}\frac{\partial }{\partial M_u} (f_{i,u} \circ w_T)(t)~dt\right) \\
+	\intertext{\ldots but because $w$ is a continuous function whose argument depends on a time we're integrating over, the continuous expansion of this formula is difficult to follow and rather unhelpful:}
 		&= \sum_i \frac{\partial A}{\partial v_i}  \left(~~\iint\limits_{t_1, t_2 \in T} \frac{\partial f_{i,u}}{\partial w_{T(t_2)}(t_1)} \frac{d w_{T(t_2)} (t_1)}{d M_u} ~dt_1\right)
 	\end{align*}
 	
-	Because of $T$ is discrete, $w_T$ is really just an $n$-vector over $\D$, and so our score function becomes
-	
+	\noindent Instead, because of $T$ is discrete, $w_T$ is really just an $n$-vector over $\D$, and so our score function is
 	\begin{align*}
 		S(u) &= \sum_i \frac{\partial A}{\partial v_i} \sum_{t_j} \frac{\partial }{\partial M_u} f_{i,u}\Big(D_{t_j}, D_{t_{j-1}}, \ldots, D_{t_{j-n+1}} \Big)\\
  		 &= \sum_i \frac{\partial A}{\partial v_i} \sum_{t_j} \sum_m \boxed{\frac{\partial f_{i,u}}{\partial x_m}}~\frac{d x_m }{d M_u}\Big(\{x_m\} \Big)
 	\end{align*}
 	\ldots where $\{x_m\}$ is the expanded representation of the $D_i$ variables, and $x_m$ is the $m^{th}$ real argument to $f$.
-	This is still pretty ugly, but fortunately, we can make sense of these quantities. The total amount of money given is the sum of the specific $x_m$ variables that align with basis elements of $\mathcal{M}$.
-	\[ M = \sum_{x_l \in \mathscr{B}\mathcal{M}} x_l \]
-	\[ \Rightarrow \qquad \frac{dx_m}{dM} = \begin{cases}1 - \sum\limits_{m \neq l, x_l \in \mathscr{B}\mathcal{M}} x_l & \text{if $x_m \in \mathscr{B}\mathcal{M}$} \\ 0 & \text{otherwise}\end{cases} \]
-	Fortunately, we're summing over all of these elements, and so we have
-	
-	The boxed quantity is a number we can recover from the weights of our trained function $f$. The number to its right is even simpler; $x_m$ is either $M_u$ or an independent variable, and so if it simplifies to $\delta_{mk}$
+	This is still pretty ugly, but fortunately, we can make sense of these quantities. The total amount of money given is the sum of the specific $x_m$ variables that align with basis elements of $\mathcal{M}$. We have plenty of degrees of freedom to play with from $\{x_i\}$, so we make the arbitrary choice that each one can be represented as $M_u \hat{x_i}$, with $\{\hat{x_i}\}$ normalized and lying in the $(n-1)-$dimensional sphere, and so $dx_m /d M_u = \hat{x_i}$
+		
+	The boxed quantity is a number we can recover from the weights of our trained function $f$. 
 	
 	In the case that $A$ is just the linear function $A(V) = \sum_i a_i v_i$, we can write the score completely in terms of known variables:
 	

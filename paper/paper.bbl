@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{tensorflow}
 {\sc Abadi, M., Agarwal, A., Barham, P., Brevdo, E., Chen, Z., Citro, C.,
@@ -12,6 +12,37 @@
   2015.
 \newblock Software available from tensorflow.org.
 
+\bibitem{barrow2013ranking}
+{\sc Barrow, D., Drayer, I., Elliott, P., Gaut, G., and Osting, B.}
+\newblock Ranking rankings: an empirical comparison of the predictive power of
+  sports ranking methods.
+\newblock {\em Journal of Quantitative Analysis in Sports 9}, 2 (2013),
+  187--202.
+
+\bibitem{bortolan1991ecg}
+{\sc Bortolan, G., Degani, R., and Willems, J.}
+\newblock Ecg classification with neural networks and cluster analysis.
+\newblock In {\em Computers in Cardiology 1991, Proceedings.\/} (1991), IEEE,
+  pp.~177--180.
+
+\bibitem{cho}
+{\sc Cho, K., van Merrienboer, B., Bahdanau, D., and Bengio, Y.}
+\newblock On the properties of neural machine translation: Encoder-decoder
+  approaches.
+\newblock {\em CoRR abs/1409.1259\/} (2014).
+
+\bibitem{desrochers2010trends}
+{\sc Desrochers, D.~M.}
+\newblock {\em Trends in College Spending 1998-2008: Where Does the Money Come
+  From? Where Does it Go? What Does it Buy?}
+\newblock Delta Cost Project, 2010.
+
+\bibitem{gelman2006data}
+{\sc Gelman, A., and Hill, J.}
+\newblock {\em Data analysis using regression and multilevel/hierarchical
+  models}.
+\newblock Cambridge University Press, 2006.
+
 \bibitem{greenwald1996effect}
 {\sc Greenwald, R., Hedges, L.~V., and Laine, R.~D.}
 \newblock The effect of school resources on student achievement.
@@ -22,6 +53,11 @@
 \newblock An exchange: Part i: Does money matter? a meta-analysis of studies of
   the effects of differential school inputs on student outcomes.
 \newblock {\em Educational researcher 23}, 3 (1994), 5--14.
+
+\bibitem{manning2008introduction}
+{\sc Manning, C.~D., Raghavan, P., Sch{\"u}tze, H., et~al.}
+\newblock {\em Introduction to information retrieval}, vol.~1.
+\newblock Cambridge university press Cambridge, 2008.
 
 \bibitem{norstad1999introduction}
 {\sc Norstad, J.}
@@ -36,5 +72,15 @@
   Duchesnay, E.}
 \newblock Scikit-learn: Machine learning in {P}ython.
 \newblock {\em Journal of Machine Learning Research 12\/} (2011), 2825--2830.
+
+\bibitem{tan2013data}
+{\sc Tan, P.-N., Steinbach, M., and Kumar, V.}
+\newblock Data mining cluster analysis: Basic concepts and algorithms, 2013.
+
+\bibitem{teng1998transportation}
+{\sc Teng, J.-Y., and Tzeng, G.-H.}
+\newblock Transportation investment project selection using fuzzy
+  multiobjective programming.
+\newblock {\em Fuzzy sets and systems 96}, 3 (1998), 259--280.
 
 \end{thebibliography}
