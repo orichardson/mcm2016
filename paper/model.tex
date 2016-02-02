@@ -50,9 +50,13 @@
 	\end{equation}
 	where $V_u \in \V$ is the most current metric vector for university $u$. Now, we can do some multi-variable calculus magic to get something easier to calculate.
 
+The model can be broken down into five connected parts, delineated below.
 	\begin{enumerate}
-		\item Apply Machine Learning techniques to estimate the effect of donations on the 
-		\item 
+		\item Apply Machine Learning techniques to estimate the effect of donations on all university attributes over time.
+		\item Cluster university attribute variables together computationally by analyzing characteristics such as their relative separation, numeric values, or range of values. Give weight to each variable based on its location in a cluster.
+		\item Take derivatives to determine changes in variables caused by different amounts of funding. Optimal change belongs to highest rank university. All universities are given a normalized score on this scale.
+		\item Determine a utility function that is related to the score determined in step (3) to model the utility of giving money to each university. Universities with highest utility receive proportional grant sizes.
+		\item Justify time line for grant money distribution over a period of five years.
 	\end{enumerate}
 	
 	
