@@ -1,19 +1,21 @@
 % !TeX root = discussion.tex
 \documentclass[paper.tex]{subfiles}
 \begin{document}
+	\section{Discussion}
 	\subsection{Strengths}
 	The model has several strengths. The first and perhaps most important strength is that our model is quite interesting. The concept of removing human personality, ethics, and training from decision making processes is a fascinating endeavor. Using machine learning techniques for real-world application in the realm of finances is also intriguing. The potential ramifications of the model could be vast: perhaps more grants would be awarded across the board if selecting grand candidates were a less grueling and tedious process. 
 	
 	A related strength is that our model requires very little human input. Aside from a few determinations of "good" and "bad" for variables, humans need not do much work to determine grant-winners, other than perhaps to click a button to run the program.
 	
-	Another strength is that our model consistently makes very general assumptions about the data. We never hand picked any data to specifically analyze, nor did we remove lots of data that met all our criteria. 
+	Another strength is that our model consistently makes very general assumptions about the data. We never hand picked any data to specifically analyze, nor did we remove lots of data that met all our criteria. For example, the machine learning algorithms we utilize reflect natural structure in the data: for instance, the RNNs encode sequentiality and the GRU cells are known to be effective in retaining memory about previous terms in the sequence. Moreover, the data is naturally structured sequentially by constructing a sequence of feature vectors for each university. While the SVMs do not encode this sequentiality as nicely, they encode the priority we should give each financial feature, e.g. importance of revenue spent on administration.
 		
 	\subsection{Weaknesses}
-	The time constraints of this competition made room for many weaknesses in our model.
-	
-	The first weakness is that part (1) of our model, the machine learning algorithm that maps finance data to overall changes in data, took a very long time to train.
-	
-	1. not training properly
-	2. there would likely be errors if we had data
-	3. it remains untested. part one is tricky!
+	The time constraints of this competition made room for many weaknesses in our model. The first weakness is that part (1) of our model, the machine learning algorithm that maps finance data to overall changes in data, took a very long time to train among other things. Some issues we had were that
+\begin{enumerate}
+\item the models did not training properly, 
+\end{enumerate}
+because
+\begin{enumerate}[resume]
+\item preprocessing the data was quite difficult, owing to this weekend being our first exposure to \texttt{tensorflow} and it being a relatively new library.
+\end{enumerate}	
 \end{document}
