@@ -1,7 +1,7 @@
 \documentclass[paper.tex]{subfiles}
 
 \begin{document}
-	\section*{Appendix A: Score Derivation}
+	\section*{Not-An-AppendixAppendix: Score Derivation}
 	If we let $\xi_i$ be the $i^{th}$ component of $V_u + \int_{T} F(w_T, u)~dt$, then we have
 	\begin{align*}
 		S(u) &=\frac{d}{dM_u} A\left( \xi \right) \\
@@ -20,14 +20,9 @@
  		 &= \sum_i \frac{\partial A}{\partial v_i} \sum_{t_j} \sum_m \boxed{\frac{\partial f_{i,u}}{\partial x_m}}~\frac{d x_m }{d M_u}\Big(\{x_m\} \Big)
 	\end{align*}
 	\ldots where $\{x_m\}$ is the expanded representation of the $D_i$ variables, and $x_m$ is the $m^{th}$ real argument to $f$.
-	This is still pretty ugly, but fortunately, we can make sense of these quantities. The total amount of money given is the sum of the specific $x_m$ variables that align with basis elements of $\mathcal{M}$. We have plenty of degrees of freedom to play with from $\{x_i\}$, so we make the arbitrary choice that each one can be represented as $M_u \hat{x_i}$, with $\{\hat{x_i}\}$ normalized and lying in the $(n-1)-$dimensional sphere, and so $dx_m /d M_u = \hat{x_i}$
-		
-	The boxed quantity is a number we can recover from the weights of our trained function $f$. 
+	This is still pretty ugly, but fortunately, we can make sense of these quantities. The total amount of money given is the sum of the specific $x_m$ variables that align with basis elements of $\mathcal{M}$. We have plenty of degrees of freedom to play with from $\{x_i\}$, so we make the arbitrary choice that each one can be represented as $M_u \hat{x_i}$, with $\{\hat{x_i}\}$ normalized and lying in the $(n-1)-$dimensional sphere, and so $dx_m /d M_u = \hat{x_i}$ 
 	
-	In the case that $A$ is just the linear function $A(V) = \sum_i a_i v_i$, we can write the score completely in terms of known variables:
-	
-	\begin{equation}
-		S(u) = \sum_i a_i \sum_{t_j, m} \psi 
-	\end{equation}
+	The boxed quantity is a number we can recover from the weights of our trained function $F$; these are just weights that one can extract from the support vectors in the case of an SVM, or from the output layer of the recursive neural network. In the case that $A$ is just the linear function $A(V) = \sum_i a_i v_i$, we can perform one last simplification, as 
+	\[ \frac{\partial A}{\partial v_i} = a_i\]
 	
 \end{document}
