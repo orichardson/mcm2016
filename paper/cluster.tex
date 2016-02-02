@@ -70,12 +70,13 @@
 	\end{table}
 		
 	\subsection{Assigning Weights.}
-	The simplest and most natural model to consider is the linear one \footnote{This also happens to be plenty general enough for our purposes; the dimensionality of the data is so large that }:
+	The simplest and most natural model to consider is the linear one \footnote{This also happens to be plenty general enough for our purposes; the large dimensionality of the data means that it is extremely sparse; any extensions of this would have to based on existing information}:
 	\[A(v) = \sum_i a_i v_i \]
 	where $a_i \in \Re$ representing the weight of each $v_i$. The interesting piece, of course, is determining the actual weights $\{a_i\}$. Now that we have clusters of values, we have humans select the top three positive indicators, and top three negative indicators of student success. Each cluster receives an impact score of +1 for each of the best positive indicators it contains, and an impact score of -1 for each one of the worst predictors it contains. 
 	
-	With each cluster given an impact score, we can now use distances from cluster centers to determine 
-	
+	With each cluster given an impact score, we can now use distances from cluster centers to determine the weights. Let $\mathcal{C}$ be the set of clusters, with each cluster $c_k$ having a center $p_k$, and impact $\zeta_k$, then we can assign each weight by applying a Gaussian
+	\[ a_i = \sum_{c \in \mathcal{C}} \zeta_k\exp \left(\frac{d(p_k, v_i)^2}{\chi^2} \right) \]
+	Where $\chi$ is an arbitrary hyper parameter; here, we set it to 1 because the data is scaled to have zero mean and unit variance.
 	
 	
 \end{document}
