@@ -20,8 +20,17 @@
 		\item[$\hookrightarrow$] Over a period of five years, the foundation will award each grant according to a predictive distribution of optimal funding per year at each institution. This data comes from an earlier part of the model involved with neural networks.
 	\end{itemize}
 	
-	
+	\newpage
 	\section{Assumptions}
+	\subsection{Clustering Assumptions}
+	\begin{enumerate}[itemsep=-0.5em]
+		\item The co-variance of two variables is meaningful because we humans have subconsciously picked variables that over-represent the things that we know.
+		\item The distance metric is nicely behaved -- i.e., two semantically equivalent variables align well in our data, and two disparate variables have good separation.
+		\item As a result, we can follow the ``centers'' of these groups nicely back into the data to find the centers of semantic categories we care about.
+		\item Student success is a quantity which widely influences many of these variables.
+	\end{enumerate} 
+		
+	
 Utility Assumptions:
 	\begin{enumerate}
 		\item The utility function will fall off toward a constant value as grant size goes to infinity.
