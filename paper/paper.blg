@@ -1,26 +1,25 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: paper.aux
 The style file: acm.bst
 Database file #1: references.bib
-Repeated entry---line 121 of file references.bib
+Repeated entry---line 132 of file references.bib
  : @article{barrow2013ranking
  :                           ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 131 of file references.bib
+Repeated entry---line 142 of file references.bib
  : @book{desrochers2010trends
  :                           ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 138 of file references.bib
+Repeated entry---line 149 of file references.bib
  : @book{gelman2006data
  :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 145 of file references.bib
+Repeated entry---line 156 of file references.bib
  : @misc{tan2013data
  :                  ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 151 of file references.bib
+Repeated entry---line 162 of file references.bib
  : @book{manning2008introduction
  :                              ,
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "univariate"
-Warning--I didn't find a database entry for "silhouette"
 (There were 5 error messages)
